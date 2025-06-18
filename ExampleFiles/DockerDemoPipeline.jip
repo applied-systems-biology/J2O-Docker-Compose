@@ -1,0 +1,2647 @@
+{
+  "jipipe:project-type" : "project",
+  "jipipe:project-format-version" : 1,
+  "metadata" : {
+    "name" : "Empty (1 compartment)",
+    "description" : "<html><body><h1>JIPipe pipeline projects</h1><p>JIPipe organizes pipelines in projects that can be saved and loaded from disk. Each pipeline is organized into <b>Compartments</b> that separate the whole graph into functional units. You can find an overview of all compartments\nin the <i>Compartments</i> tab. You can re-open the tab by selecting <i>Compartment > Edit compartments</i> if you closed the tab.<br/><br/>By double-clicking a compartment in the overview, JIPipe will open an editor where you can modify the sub-pipeline\nthat is associated to the compartment. If you just want to run a project, you can find the `Run` button at the top-right\ncorner.\n\nPipeline developers might have organized a set of most common pipeline parameters. You can find them in <i>Project > Project overview</i>\nalongside additional information like the authors, citations, and website.\n\nThis template contains one graph node called 'Analysis'</body></html>",
+    "summary" : "<html><head></head><body></body></html>",
+    "authors" : [ {
+      "title" : null,
+      "first-name" : "Marius",
+      "last-name" : "Wank",
+      "affiliations-list" : [ ],
+      "website" : null,
+      "contact" : null,
+      "first-author" : false,
+      "corresponding-author" : false,
+      "orcid" : "",
+      "custom-text" : "<html><head></head><body></body></html>"
+    } ],
+    "acknowledgements" : [ ],
+    "website" : "",
+    "license" : "",
+    "citation" : "",
+    "dependency-citations" : [ ],
+    "categories" : [ ],
+    "update-site-dependencies" : [ ],
+    "template-description" : "Project that contains one compartment",
+    "permissions" : {
+      "prevent-adding-deleting-nodes" : false,
+      "prevent-modifying-slots" : false
+    },
+    "user-directories" : {
+      "user-directories" : {
+        "template" : {
+          "parameters" : {
+            "path" : {
+              "key" : "path",
+              "name" : "Path",
+              "description" : "The path that will be referenced",
+              "hidden" : false,
+              "field-class" : "java.nio.file.Path",
+              "value" : "",
+              "short-key" : "path",
+              "ui-order" : -90,
+              "field-class-id" : "path"
+            },
+            "must-exist" : {
+              "key" : "must-exist",
+              "name" : "Check if exists",
+              "description" : "Indicates that the directory should exist",
+              "hidden" : false,
+              "field-class" : "boolean",
+              "value" : true,
+              "short-key" : "must-exist",
+              "ui-order" : 0,
+              "field-class-id" : "primitive.boolean"
+            },
+            "name" : {
+              "key" : "name",
+              "name" : "Name",
+              "description" : "Name as displayed in the UI",
+              "hidden" : false,
+              "field-class" : "java.lang.String",
+              "value" : "",
+              "short-key" : "name",
+              "ui-order" : -95,
+              "field-class-id" : "string"
+            },
+            "description" : {
+              "key" : "description",
+              "name" : "Description",
+              "description" : "Description as displayed in the UI",
+              "hidden" : false,
+              "field-class" : "java.lang.String",
+              "value" : "",
+              "short-key" : "description",
+              "ui-order" : -92,
+              "field-class-id" : "string"
+            },
+            "key" : {
+              "key" : "key",
+              "name" : "Key",
+              "description" : "The key that will be used to access the directory. Cannot be empty.",
+              "hidden" : false,
+              "field-class" : "java.lang.String",
+              "value" : "",
+              "short-key" : "key",
+              "ui-order" : -100,
+              "field-class-id" : "string"
+            }
+          }
+        },
+        "items" : [ ]
+      }
+    },
+    "global-parameters" : {
+      "parameters" : { }
+    },
+    "node-templates" : [ ],
+    "restore-tabs" : true
+  },
+  "dependencies" : [ {
+    "metadata" : {
+      "name" : "Strings",
+      "description" : "<html><head></head><body>A JIPipe project</body></html>",
+      "summary" : "<html><head></head><body></body></html>",
+      "authors" : [ ],
+      "acknowledgements" : [ ],
+      "website" : "",
+      "license" : "",
+      "citation" : "",
+      "dependency-citations" : [ ],
+      "categories" : [ ]
+    },
+    "id" : "org.hkijena.jipipe:strings",
+    "version" : "5.3.0",
+    "provides" : [ ],
+    "ij:update-site-dependencies" : [ ],
+    "dependencies" : [ ],
+    "ij:update-site-providers" : [ ]
+  }, {
+    "metadata" : {
+      "name" : "Compartment management",
+      "description" : "<html><head></head><body>Data types required for graph compartment management</body></html>",
+      "summary" : "<html><head></head><body>Data types required for graph compartment management</body></html>",
+      "authors" : [ {
+        "title" : null,
+        "first-name" : "Zoltán",
+        "last-name" : "Cseresnyés",
+        "affiliations-list" : [ "Applied Systems Biology, Leibniz Institute for Natural Product Research and Infection Biology – Hans-Knöll-Institute, Jena, Germany" ],
+        "website" : "https://www.leibniz-hki.de/en/staff-details.html?member=144",
+        "contact" : "zoltan.cseresnyes@leibniz-hki.de",
+        "first-author" : true,
+        "corresponding-author" : false,
+        "orcid" : "https://orcid.org/0000-0002-6574-2588",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Ruman",
+        "last-name" : "Gerst",
+        "affiliations-list" : [ "Applied Systems Biology, Leibniz Institute for Natural Product Research and Infection Biology – Hans-Knöll-Institute, Jena, Germany", "Faculty of Biological Sciences, Friedrich Schiller University Jena, Germany" ],
+        "website" : "https://www.leibniz-hki.de/en/staff-details.html?member=1027",
+        "contact" : "ruman.gerst@leibniz-hki.de",
+        "first-author" : true,
+        "corresponding-author" : false,
+        "orcid" : "https://orcid.org/0000-0002-0723-6038",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Marc Thilo",
+        "last-name" : "Figge",
+        "affiliations-list" : [ "Applied Systems Biology, Leibniz Institute for Natural Product Research and Infection Biology – Hans-Knöll-Institute, Jena, Germany", "Institute of Microbiology, Faculty of Biological Sciences, Friedrich Schiller University Jena, Germany" ],
+        "website" : "https://www.leibniz-hki.de/en/staff-details.html?member=81",
+        "contact" : "thilo.figge@leibniz-hki.de",
+        "first-author" : false,
+        "corresponding-author" : true,
+        "orcid" : "https://orcid.org/0000-0002-4044-9166",
+        "custom-text" : "<html><head></head><body></body></html>"
+      } ],
+      "acknowledgements" : [ ],
+      "website" : "https://www.jipipe.org/",
+      "license" : "MIT",
+      "citation" : "Gerst, R., Cseresnyés, Z. & Figge, M.T. JIPipe: visual batch processing for ImageJ. Nat Methods (2023). https://doi.org/10.1038/s41592-022-01744-4",
+      "dependency-citations" : [ ],
+      "categories" : [ "Core" ]
+    },
+    "id" : "org.hkijena.jipipe:compartments",
+    "version" : "5.3.0",
+    "provides" : [ ],
+    "ij:update-site-dependencies" : [ ],
+    "dependencies" : [ ],
+    "ij:update-site-providers" : [ ]
+  }, {
+    "metadata" : {
+      "name" : "OMERO Integration",
+      "description" : "<html><head></head><body>Integrates OMERO</body></html>",
+      "summary" : "<html><head></head><body>Integrates OMERO</body></html>",
+      "authors" : [ {
+        "title" : null,
+        "first-name" : "Zoltán",
+        "last-name" : "Cseresnyés",
+        "affiliations-list" : [ "Applied Systems Biology, Leibniz Institute for Natural Product Research and Infection Biology – Hans-Knöll-Institute, Jena, Germany" ],
+        "website" : "https://www.leibniz-hki.de/en/staff-details.html?member=144",
+        "contact" : "zoltan.cseresnyes@leibniz-hki.de",
+        "first-author" : true,
+        "corresponding-author" : false,
+        "orcid" : "https://orcid.org/0000-0002-6574-2588",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Ruman",
+        "last-name" : "Gerst",
+        "affiliations-list" : [ "Applied Systems Biology, Leibniz Institute for Natural Product Research and Infection Biology – Hans-Knöll-Institute, Jena, Germany", "Faculty of Biological Sciences, Friedrich Schiller University Jena, Germany" ],
+        "website" : "https://www.leibniz-hki.de/en/staff-details.html?member=1027",
+        "contact" : "ruman.gerst@leibniz-hki.de",
+        "first-author" : true,
+        "corresponding-author" : false,
+        "orcid" : "https://orcid.org/0000-0002-0723-6038",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Marc Thilo",
+        "last-name" : "Figge",
+        "affiliations-list" : [ "Applied Systems Biology, Leibniz Institute for Natural Product Research and Infection Biology – Hans-Knöll-Institute, Jena, Germany", "Institute of Microbiology, Faculty of Biological Sciences, Friedrich Schiller University Jena, Germany" ],
+        "website" : "https://www.leibniz-hki.de/en/staff-details.html?member=81",
+        "contact" : "thilo.figge@leibniz-hki.de",
+        "first-author" : false,
+        "corresponding-author" : true,
+        "orcid" : "https://orcid.org/0000-0002-4044-9166",
+        "custom-text" : "<html><head></head><body></body></html>"
+      } ],
+      "acknowledgements" : [ {
+        "title" : null,
+        "first-name" : "Chris",
+        "last-name" : "Allan",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee, Scotland, UK", "Glencoe Software, Inc., Seattle, Washington, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : true,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Jean-Marie",
+        "last-name" : "Burel",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee, Scotland, UK", "Glencoe Software, Inc., Seattle, Washington, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Josh",
+        "last-name" : "Moore",
+        "affiliations-list" : [ "Glencoe Software, Inc., Seattle, Washington, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Colin",
+        "last-name" : "Blackburn",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee, Scotland, UK", "Glencoe Software, Inc., Seattle, Washington, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Melissa",
+        "last-name" : "Linkert",
+        "affiliations-list" : [ "Glencoe Software, Inc., Seattle, Washington, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Scott",
+        "last-name" : "Loynton",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee, Scotland, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Donald",
+        "last-name" : "MacDonald",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee, Scotland, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "William J.",
+        "last-name" : "Moore",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee, Scotland, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Carlos",
+        "last-name" : "Neves",
+        "affiliations-list" : [ "Glencoe Software, Inc., Seattle, Washington, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Andrew",
+        "last-name" : "Patterson",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee, Scotland, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Michael",
+        "last-name" : "Porter",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee, Scotland, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Aleksandra",
+        "last-name" : "Tarkowska",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee, Scotland, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Brian",
+        "last-name" : "Loranger",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee, Scotland, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Jerome",
+        "last-name" : "Avondo",
+        "affiliations-list" : [ "John Innes Centre Norwich Research Park, Norwich, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Ingvar",
+        "last-name" : "Lagerstedt",
+        "affiliations-list" : [ "European Molecular B iology Laboratory– European Bioinformatics Institute, Wellcome Trust Genome Campus, Hinxton, Cambridge, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Luca",
+        "last-name" : "Lianas",
+        "affiliations-list" : [ "CRS4, Pula, Italy" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Simone",
+        "last-name" : "Leo",
+        "affiliations-list" : [ "CRS4, Pula, Italy" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Katherine",
+        "last-name" : "Hands",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee, Scotland, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Ron T.",
+        "last-name" : "Hay",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee, Scotland, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Ardan",
+        "last-name" : "Patwardhan",
+        "affiliations-list" : [ "European Molecular B iology Laboratory– European Bioinformatics Institute, Wellcome Trust Genome Campus, Hinxton, Cambridge, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Christoph",
+        "last-name" : "Best",
+        "affiliations-list" : [ "European Molecular B iology Laboratory– European Bioinformatics Institute, Wellcome Trust Genome Campus, Hinxton, Cambridge, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Gerard J.",
+        "last-name" : "Kleywegt",
+        "affiliations-list" : [ "European Molecular B iology Laboratory– European Bioinformatics Institute, Wellcome Trust Genome Campus, Hinxton, Cambridge, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Gianluigi",
+        "last-name" : "Zanetti",
+        "affiliations-list" : [ "CRS4, Pula, Italy" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Jason R.",
+        "last-name" : "Swedlow",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee, Scotland, UK", "Glencoe Software, Inc., Seattle, Washington, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      } ],
+      "website" : "https://www.jipipe.org/",
+      "license" : "MIT",
+      "citation" : "Gerst, R., Cseresnyés, Z. & Figge, M.T. JIPipe: visual batch processing for ImageJ. Nat Methods (2023). https://doi.org/10.1038/s41592-022-01744-4",
+      "dependency-citations" : [ "Chris Allan, Jean-Marie Burel, Josh Moore, Colin Blackburn, Melissa Linkert, Scott Loynton, Donald MacDonald, William J Moore, Carlos Neves, Andrew Patterson, Michael Porter, Aleksandra Tarkowska, Brian Loranger, Jerome Avondo, Ingvar Lagerstedt, Luca Lianas, Simone Leo, Katherine Hands, Ron T Hay, Ardan Patwardhan, Christoph Best, Gerard J Kleywegt, Gianluigi Zanetti & Jason R Swedlow (2012) OMERO: flexible, model-driven data management for experimental biology. Nature Methods 9, 245–253. Published: 28 February 2012" ],
+      "categories" : [ "Import-Export", "SciJava", "OME" ]
+    },
+    "id" : "org.hkijena.jipipe:omero",
+    "version" : "5.3.0",
+    "provides" : [ ],
+    "ij:update-site-dependencies" : [ ],
+    "dependencies" : [ ],
+    "ij:update-site-providers" : [ ]
+  }, {
+    "metadata" : {
+      "name" : "Standard table operations",
+      "description" : "<html><head></head><body>A JIPipe project</body></html>",
+      "summary" : "<html><head></head><body></body></html>",
+      "authors" : [ ],
+      "acknowledgements" : [ ],
+      "website" : "",
+      "license" : "",
+      "citation" : "",
+      "dependency-citations" : [ ],
+      "categories" : [ ]
+    },
+    "id" : "org.hkijena.jipipe:table-operations",
+    "version" : "5.3.0",
+    "provides" : [ ],
+    "ij:update-site-dependencies" : [ ],
+    "dependencies" : [ ],
+    "ij:update-site-providers" : [ ]
+  }, {
+    "metadata" : {
+      "name" : "Forms",
+      "description" : "<html><head></head><body>A JIPipe project</body></html>",
+      "summary" : "<html><head></head><body></body></html>",
+      "authors" : [ ],
+      "acknowledgements" : [ ],
+      "website" : "",
+      "license" : "",
+      "citation" : "",
+      "dependency-citations" : [ ],
+      "categories" : [ ]
+    },
+    "id" : "org.hkijena.jipipe:forms",
+    "version" : "5.3.0",
+    "provides" : [ ],
+    "ij:update-site-dependencies" : [ ],
+    "dependencies" : [ ],
+    "ij:update-site-providers" : [ ]
+  }, {
+    "metadata" : {
+      "name" : "ImageJ integration",
+      "description" : "<html><head></head><body>A JIPipe project</body></html>",
+      "summary" : "<html><head></head><body></body></html>",
+      "authors" : [ ],
+      "acknowledgements" : [ ],
+      "website" : "",
+      "license" : "",
+      "citation" : "",
+      "dependency-citations" : [ ],
+      "categories" : [ ]
+    },
+    "id" : "org.hkijena.jipipe:imagej-integration",
+    "version" : "5.3.0",
+    "provides" : [ ],
+    "ij:update-site-dependencies" : [ ],
+    "dependencies" : [ ],
+    "ij:update-site-providers" : [ ]
+  }, {
+    "metadata" : {
+      "name" : "ImageJ algorithms",
+      "description" : "<html><head></head><body>Integrates ImageJ algorithms into JIPipe</body></html>",
+      "summary" : "<html><head></head><body>Integrates ImageJ algorithms into JIPipe</body></html>",
+      "authors" : [ {
+        "title" : null,
+        "first-name" : "Zoltán",
+        "last-name" : "Cseresnyés",
+        "affiliations-list" : [ "Applied Systems Biology, Leibniz Institute for Natural Product Research and Infection Biology – Hans-Knöll-Institute, Jena, Germany" ],
+        "website" : "https://www.leibniz-hki.de/en/staff-details.html?member=144",
+        "contact" : "zoltan.cseresnyes@leibniz-hki.de",
+        "first-author" : true,
+        "corresponding-author" : false,
+        "orcid" : "https://orcid.org/0000-0002-6574-2588",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Ruman",
+        "last-name" : "Gerst",
+        "affiliations-list" : [ "Applied Systems Biology, Leibniz Institute for Natural Product Research and Infection Biology – Hans-Knöll-Institute, Jena, Germany", "Faculty of Biological Sciences, Friedrich Schiller University Jena, Germany" ],
+        "website" : "https://www.leibniz-hki.de/en/staff-details.html?member=1027",
+        "contact" : "ruman.gerst@leibniz-hki.de",
+        "first-author" : true,
+        "corresponding-author" : false,
+        "orcid" : "https://orcid.org/0000-0002-0723-6038",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Marc Thilo",
+        "last-name" : "Figge",
+        "affiliations-list" : [ "Applied Systems Biology, Leibniz Institute for Natural Product Research and Infection Biology – Hans-Knöll-Institute, Jena, Germany", "Institute of Microbiology, Faculty of Biological Sciences, Friedrich Schiller University Jena, Germany" ],
+        "website" : "https://www.leibniz-hki.de/en/staff-details.html?member=81",
+        "contact" : "thilo.figge@leibniz-hki.de",
+        "first-author" : false,
+        "corresponding-author" : true,
+        "orcid" : "https://orcid.org/0000-0002-4044-9166",
+        "custom-text" : "<html><head></head><body></body></html>"
+      } ],
+      "acknowledgements" : [ {
+        "title" : null,
+        "first-name" : "Curtis T.",
+        "last-name" : "Rueden",
+        "affiliations-list" : [ "Laboratory for Optical and Computational Instrumentation, University of Wisconsin at Madison, Madison, Wisconsin, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : true,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Johannes",
+        "last-name" : "Schindelin",
+        "affiliations-list" : [ "Laboratory for Optical and Computational Instrumentation, University of Wisconsin at Madison, Madison, Wisconsin, USA", "Morgridge Institute for Research, Madison, Wisconsin, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Mark C.",
+        "last-name" : "Hiner",
+        "affiliations-list" : [ "Laboratory for Optical and Computational Instrumentation, University of Wisconsin at Madison, Madison, Wisconsin, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Barry E.",
+        "last-name" : "DeZonia",
+        "affiliations-list" : [ "Laboratory for Optical and Computational Instrumentation, University of Wisconsin at Madison, Madison, Wisconsin, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Alison E.",
+        "last-name" : "Walter",
+        "affiliations-list" : [ "Laboratory for Optical and Computational Instrumentation, University of Wisconsin at Madison, Madison, Wisconsin, USA", "Morgridge Institute for Research, Madison, Wisconsin, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Ellen T.",
+        "last-name" : "Arena",
+        "affiliations-list" : [ "Laboratory for Optical and Computational Instrumentation, University of Wisconsin at Madison, Madison, Wisconsin, USA", "Morgridge Institute for Research, Madison, Wisconsin, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Kevin W.",
+        "last-name" : "Eliceiri",
+        "affiliations-list" : [ "Laboratory for Optical and Computational Instrumentation, University of Wisconsin at Madison, Madison, Wisconsin, USA", "Morgridge Institute for Research, Madison, Wisconsin, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : true,
+        "corresponding-author" : true,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Caroline A.",
+        "last-name" : "Schneider",
+        "affiliations-list" : [ "Laboratory for Optical and Computational Instrumentation, University of Wisconsin at Madison, Madison, Wisconsin, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : true,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Wayne S.",
+        "last-name" : "Rasband",
+        "affiliations-list" : [ "Section on Instrumentation, US National Institutes of Health, Bethesda, Maryland, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Melissa",
+        "last-name" : "Linkert",
+        "affiliations-list" : [ "Laboratory for Optical and Computational Instrumentation, Department of Molecular Biology", "Department of Biomedical Engineering, Graduate School, University of Wisconsin at Madison, Madison, WI 53711", "Glencoe Software, Inc., Seattle, WA 98101" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : true,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Chris",
+        "last-name" : "Allan",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee DD1 5EH, Scotland, UK", "Glencoe Software, Inc., Seattle, WA 98101" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Jean-Marie",
+        "last-name" : "Burel",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee DD1 5EH, Scotland, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Will",
+        "last-name" : "Moore",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee DD1 5EH, Scotland, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Andrew",
+        "last-name" : "Patterson",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee DD1 5EH, Scotland, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Brian",
+        "last-name" : "Loranger",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee DD1 5EH, Scotland, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Josh",
+        "last-name" : "Moore",
+        "affiliations-list" : [ "Glencoe Software, Inc., Seattle, WA 98101" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Carlos",
+        "last-name" : "Neves",
+        "affiliations-list" : [ "Glencoe Software, Inc., Seattle, WA 98101" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Donald",
+        "last-name" : "MacDonald",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee DD1 5EH, Scotland, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Aleksandra",
+        "last-name" : "Tarkowska",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee DD1 5EH, Scotland, UK" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Caitlin",
+        "last-name" : "Sticco",
+        "affiliations-list" : [ "Laboratory for Optical and Computational Instrumentation, Department of Molecular Biology", "Department of Biomedical Engineering, Graduate School, University of Wisconsin at Madison, Madison, WI 53711" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Emma",
+        "last-name" : "Hill",
+        "affiliations-list" : [ "The Rockefeller University Press, New York, NY 10065" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Mike",
+        "last-name" : "Rossner",
+        "affiliations-list" : [ "The Rockefeller University Press, New York, NY 10065" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Jason R.",
+        "last-name" : "Swedlow",
+        "affiliations-list" : [ "Wellcome Trust Centre for Gene Regulation and Expression, College of Life Sciences, University of Dundee, Dundee DD1 5EH, Scotland, UK", "Glencoe Software, Inc., Seattle, WA 98101" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : true,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "David",
+        "last-name" : "Legland",
+        "affiliations-list" : [ "UR1268 Biopolymers, Interactions and Assemblies, INRA, Nantes, France", "UR1268 Biopolymers, Interactions and Assemblies, INRA, Nantes, France", "UMR782 Food Process Engineering and Microbiology, INRA, AgroParisTech, Thiverval-Grignon, France" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : true,
+        "corresponding-author" : true,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Ignacio",
+        "last-name" : "Arganda-Carreras",
+        "affiliations-list" : [ "Institut Jean-Pierre Bourgin, INRA, AgroParisTech, CNRS, Université Paris-Saclay, Versailles, Cedex, RD10, 78026, France", "Basque Foundation for Science, Ikerbasque, Bilbao, 48013, Spain", "Computer Science and Artificial Intelligence Department, Basque Country University (UPV/EHU), Donostia-San Sebastian, 20018, Spain", "Donostia International Physics Center (DIPC), Donostia-San Sebastian, 20018, Spain" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Philippe",
+        "last-name" : "Andrey",
+        "affiliations-list" : [ "Institut Jean-Pierre Bourgin, INRA, AgroParisTech, CNRS, Université Paris-Saclay, Versailles, Cedex, RD10, 78026, France", "Sorbonne Universités, UPMC Univ Paris 06, UFR 927, Paris, France" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Michael R.",
+        "last-name" : "Berthold",
+        "affiliations-list" : [ "Department of Computer and Information Science, Universität Konstanz, Konstanz, Germany" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Ilya G.",
+        "last-name" : "Goldberg",
+        "affiliations-list" : [ "National Institute on Aging, National Institutes of Health, Baltimore, Maryland, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Luis",
+        "last-name" : "Ibáñez",
+        "affiliations-list" : [ "Kitware Inc., New York, New York, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "B S.",
+        "last-name" : "Manjunath",
+        "affiliations-list" : [ "Department of Electrical and Computer Engineering, Center for Bio-image", "Informatics, University of California Santa Barbara, Santa Barbara, California, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Maryann E.",
+        "last-name" : "Martone",
+        "affiliations-list" : [ "National Center for Microscopy and Imaging Research, University of California San Diego, La Jolla, California, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Robert F.",
+        "last-name" : "Murphy",
+        "affiliations-list" : [ "Lane Center for Computational Biology, Carnegie Mellon University, Pittsburgh, Pennsylvania, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Hanchuan",
+        "last-name" : "Peng",
+        "affiliations-list" : [ "Janelia Farm Research Campus, Howard Hughes Medical Institute, Ashburn, Virginia, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Anne L.",
+        "last-name" : "Plant",
+        "affiliations-list" : [ "Biochemical Science Division, National Institute of Standards and Technology, Gaithersburg, Maryland, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Badrinath",
+        "last-name" : "Roysam",
+        "affiliations-list" : [ "Department of Electrical and Computer Engineering, University of Houston, Houston, Texas, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Nico",
+        "last-name" : "Stuurman",
+        "affiliations-list" : [ "Department of Cellular and Molecular Pharmacology, University of California, San Francisco, San Francisco, California, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Anne E.",
+        "last-name" : "Carpenter",
+        "affiliations-list" : [ "Imaging Platform, Broad Institute of Harvard and the Massachusetts Institute of Technology, Cambridge, Massachusetts, USA" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : false,
+        "corresponding-author" : true,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Christian",
+        "last-name" : "Steger",
+        "affiliations-list" : [ "Graz University of Technology Institute of Technical Informatics Graz,Austria" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : true,
+        "corresponding-author" : false,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Erik",
+        "last-name" : "Meijering",
+        "affiliations-list" : [ "School of Computer Science and Engineering & Graduate School of Biomedical Engineering, University of New South Wales, Sydney, Australia" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : true,
+        "corresponding-author" : true,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      }, {
+        "title" : null,
+        "first-name" : "Daniel",
+        "last-name" : "Sage",
+        "affiliations-list" : [ "Biomedical Image Group (BIG), EPFL, Switzerland" ],
+        "website" : "",
+        "contact" : "",
+        "first-author" : true,
+        "corresponding-author" : true,
+        "orcid" : "",
+        "custom-text" : "<html><head></head><body></body></html>"
+      } ],
+      "website" : "https://www.jipipe.org/",
+      "license" : "MIT",
+      "citation" : "Gerst, R., Cseresnyés, Z. & Figge, M.T. JIPipe: visual batch processing for ImageJ. Nat Methods (2023). https://doi.org/10.1038/s41592-022-01744-4",
+      "dependency-citations" : [ "Rueden, C. T.; Schindelin, J. & Hiner, M. C. et al. (2017), \"ImageJ2: ImageJ for the next generation of scientific image data\", BMC Bioinformatics 18:529", "Schneider, C. A.; Rasband, W. S. & Eliceiri, K. W. (2012), \"NIH Image to ImageJ: 25 years of image analysis\", Nature methods 9(7): 671-675", "Melissa Linkert, Curtis T. Rueden, Chris Allan, Jean-Marie Burel, Will Moore, Andrew Patterson, Brian Loranger, Josh Moore, Carlos Neves, Donald MacDonald, Aleksandra Tarkowska, Caitlin Sticco, Emma Hill, Mike Rossner, Kevin W. Eliceiri, and Jason R. Swedlow (2010) Metadata matters: access to image data in the real world. The Journal of Cell Biology 189(5), 777-782", "Legland, D.; Arganda-Carreras, I. & Andrey, P. (2016), \"MorphoLibJ: integrated library and plugins for mathematical morphology with ImageJ\", Bioinformatics (Oxford Univ Press) 32(22): 3532-3534, PMID 27412086, doi:10.1093/bioinformatics/btw413", "Eliceiri K. V., Berthold M. R., Goldberg I. G., Ibanez L., Manjunath B. S., Martone M. E., Murphy R. F., Peng H., Plant A. L., Roysam B., Stuurmann N., Swedlow J.R., Tomancak P., Carpenter A. E. (2012) Biological Imaging Software Tools Nature Methods 9(7), 697-710", "Steger, C., 1998. An unbiased detector of curvilinear structures. IEEE Transactions on Pattern Analysis and Machine Intelligence, 20(2), pp.113–125.", "FeatureJ by Erik Meijering. http://imagescience.org/meijering/software/featurej/", "MTrackJ by Erik Meijering. https://imagescience.org/meijering/software/mtrackj/", "RandomJ by Erik Meijering. https://imagescience.org/meijering/software/randomj/", "ImageScience by Erik Meijering. https://imagescience.org/meijering/software/imagescience/", "OrientationJ by Daniel Sage at the Biomedical Image Group (BIG), EPFL, Switzerland. https://bigwww.epfl.ch/demo/orientation/" ],
+      "categories" : [ "Image analysis", "Image Annotation", "Analysis", "Annotation", "Segmentation", "Filtering", "Montage", "Import-Export", "Fiji", "ImageScience", "Noise", "Transform", "Binary", "Object Detection", "Feature Extraction", "Visualization" ]
+    },
+    "id" : "org.hkijena.jipipe:imagej-algorithms",
+    "version" : "5.3.0",
+    "provides" : [ ],
+    "ij:update-site-dependencies" : [ ],
+    "dependencies" : [ ],
+    "ij:update-site-providers" : [ ]
+  }, {
+    "metadata" : {
+      "name" : "Core",
+      "description" : "<html><head></head><body>A JIPipe project</body></html>",
+      "summary" : "<html><head></head><body></body></html>",
+      "authors" : [ ],
+      "acknowledgements" : [ ],
+      "website" : "",
+      "license" : "",
+      "citation" : "",
+      "dependency-citations" : [ ],
+      "categories" : [ ]
+    },
+    "id" : "org.hkijena.jipipe:core",
+    "version" : "5.3.0",
+    "provides" : [ ],
+    "ij:update-site-dependencies" : [ ],
+    "dependencies" : [ ],
+    "ij:update-site-providers" : [ ]
+  } ],
+  "runtime-partitions" : {
+    "default" : {
+      "name" : "Default",
+      "description" : "<html><head></head><body></body></html>",
+      "color" : {
+        "content" : "#FF0000",
+        "enabled" : false
+      },
+      "enable-parallelization" : false,
+      "force-pass-through-loop-iteration-in-caching" : false,
+      "loop-iteration-iterating-settings" : {
+        "column-matching" : "PrefixHashUnion",
+        "skip-incomplete" : false,
+        "custom-matched-columns-expression" : {
+          "expression" : ""
+        },
+        "annotation-merge-strategy" : "Merge",
+        "data-annotation-merge-strategy" : "MergeTables",
+        "limit" : {
+          "content" : {
+            "value" : "0-9",
+            "is-expression" : false,
+            "expression" : {
+              "expression" : "MAKE_SEQUENCE(0, 10)"
+            }
+          },
+          "enabled" : false
+        },
+        "annotation-matching-method" : "ExactMatch",
+        "custom-annotation-matching" : {
+          "expression" : "exact_match_results"
+        },
+        "force-flow-graph-solver" : false
+      },
+      "loop-iteration-merging-settings" : {
+        "column-matching" : "PrefixHashUnion",
+        "skip-incomplete" : false,
+        "custom-matched-columns-expression" : {
+          "expression" : ""
+        },
+        "annotation-merge-strategy" : "Merge",
+        "limit" : {
+          "content" : {
+            "value" : "0-9",
+            "is-expression" : false,
+            "expression" : {
+              "expression" : "MAKE_SEQUENCE(0, 10)"
+            }
+          },
+          "enabled" : false
+        },
+        "annotation-matching-method" : "ExactMatch",
+        "custom-annotation-matching" : {
+          "expression" : "exact_match_results"
+        },
+        "data-annotation-merge-strategy" : "MergeTables",
+        "force-flow-graph-solver" : false,
+        "force-na-is-any" : false
+      },
+      "output-settings" : {
+        "export-lightweight-data" : true,
+        "export-heavy-data" : true,
+        "export-loop-intermediate-results" : false,
+        "export-loop-terminating" : true,
+        "always-export-compartment-outputs" : true
+      },
+      "continue-on-failure-settings" : {
+        "continue-on-failure" : false,
+        "export-failed-loop-inputs" : true,
+        "export-failed-partition-inputs" : false,
+        "disable-on-update-cache" : false
+      },
+      "iteration-mode" : "PassThrough"
+    },
+    "extra" : [ {
+      "name" : "Filesystem",
+      "description" : "<html><head></head><body>Pre-defined partition useful for separating off filesystem operations</body></html>",
+      "color" : {
+        "content" : "#93C6A2",
+        "enabled" : true
+      },
+      "enable-parallelization" : false,
+      "force-pass-through-loop-iteration-in-caching" : false,
+      "loop-iteration-iterating-settings" : {
+        "column-matching" : "PrefixHashUnion",
+        "skip-incomplete" : false,
+        "custom-matched-columns-expression" : {
+          "expression" : ""
+        },
+        "annotation-merge-strategy" : "Merge",
+        "data-annotation-merge-strategy" : "MergeTables",
+        "limit" : {
+          "content" : {
+            "value" : "0-9",
+            "is-expression" : false,
+            "expression" : {
+              "expression" : "MAKE_SEQUENCE(0, 10)"
+            }
+          },
+          "enabled" : false
+        },
+        "annotation-matching-method" : "ExactMatch",
+        "custom-annotation-matching" : {
+          "expression" : "exact_match_results"
+        },
+        "force-flow-graph-solver" : false
+      },
+      "loop-iteration-merging-settings" : {
+        "column-matching" : "PrefixHashUnion",
+        "skip-incomplete" : false,
+        "custom-matched-columns-expression" : {
+          "expression" : ""
+        },
+        "annotation-merge-strategy" : "Merge",
+        "limit" : {
+          "content" : {
+            "value" : "0-9",
+            "is-expression" : false,
+            "expression" : {
+              "expression" : "MAKE_SEQUENCE(0, 10)"
+            }
+          },
+          "enabled" : false
+        },
+        "annotation-matching-method" : "ExactMatch",
+        "custom-annotation-matching" : {
+          "expression" : "exact_match_results"
+        },
+        "data-annotation-merge-strategy" : "MergeTables",
+        "force-flow-graph-solver" : false,
+        "force-na-is-any" : false
+      },
+      "output-settings" : {
+        "export-lightweight-data" : true,
+        "export-heavy-data" : true,
+        "export-loop-intermediate-results" : false,
+        "export-loop-terminating" : true,
+        "always-export-compartment-outputs" : true
+      },
+      "continue-on-failure-settings" : {
+        "continue-on-failure" : false,
+        "export-failed-loop-inputs" : true,
+        "export-failed-partition-inputs" : false,
+        "disable-on-update-cache" : false
+      },
+      "iteration-mode" : "PassThrough"
+    }, {
+      "name" : "Statistics",
+      "description" : "<html><head></head><body>Pre-defined partition useful for separating off statistics and postprocessing operations</body></html>",
+      "color" : {
+        "content" : "#BD93C4",
+        "enabled" : true
+      },
+      "enable-parallelization" : false,
+      "force-pass-through-loop-iteration-in-caching" : false,
+      "loop-iteration-iterating-settings" : {
+        "column-matching" : "PrefixHashUnion",
+        "skip-incomplete" : false,
+        "custom-matched-columns-expression" : {
+          "expression" : ""
+        },
+        "annotation-merge-strategy" : "Merge",
+        "data-annotation-merge-strategy" : "MergeTables",
+        "limit" : {
+          "content" : {
+            "value" : "0-9",
+            "is-expression" : false,
+            "expression" : {
+              "expression" : "MAKE_SEQUENCE(0, 10)"
+            }
+          },
+          "enabled" : false
+        },
+        "annotation-matching-method" : "ExactMatch",
+        "custom-annotation-matching" : {
+          "expression" : "exact_match_results"
+        },
+        "force-flow-graph-solver" : false
+      },
+      "loop-iteration-merging-settings" : {
+        "column-matching" : "PrefixHashUnion",
+        "skip-incomplete" : false,
+        "custom-matched-columns-expression" : {
+          "expression" : ""
+        },
+        "annotation-merge-strategy" : "Merge",
+        "limit" : {
+          "content" : {
+            "value" : "0-9",
+            "is-expression" : false,
+            "expression" : {
+              "expression" : "MAKE_SEQUENCE(0, 10)"
+            }
+          },
+          "enabled" : false
+        },
+        "annotation-matching-method" : "ExactMatch",
+        "custom-annotation-matching" : {
+          "expression" : "exact_match_results"
+        },
+        "data-annotation-merge-strategy" : "MergeTables",
+        "force-flow-graph-solver" : false,
+        "force-na-is-any" : false
+      },
+      "output-settings" : {
+        "export-lightweight-data" : true,
+        "export-heavy-data" : true,
+        "export-loop-intermediate-results" : false,
+        "export-loop-terminating" : true,
+        "always-export-compartment-outputs" : true
+      },
+      "continue-on-failure-settings" : {
+        "continue-on-failure" : false,
+        "export-failed-loop-inputs" : true,
+        "export-failed-partition-inputs" : false,
+        "disable-on-update-cache" : false
+      },
+      "iteration-mode" : "PassThrough"
+    }, {
+      "name" : "Visualization",
+      "description" : "<html><head></head><body>Pre-defined partition useful for separating off visualization and postprocessing operations</body></html>",
+      "color" : {
+        "content" : "#93BDC4",
+        "enabled" : true
+      },
+      "enable-parallelization" : false,
+      "force-pass-through-loop-iteration-in-caching" : false,
+      "loop-iteration-iterating-settings" : {
+        "column-matching" : "PrefixHashUnion",
+        "skip-incomplete" : false,
+        "custom-matched-columns-expression" : {
+          "expression" : ""
+        },
+        "annotation-merge-strategy" : "Merge",
+        "data-annotation-merge-strategy" : "MergeTables",
+        "limit" : {
+          "content" : {
+            "value" : "0-9",
+            "is-expression" : false,
+            "expression" : {
+              "expression" : "MAKE_SEQUENCE(0, 10)"
+            }
+          },
+          "enabled" : false
+        },
+        "annotation-matching-method" : "ExactMatch",
+        "custom-annotation-matching" : {
+          "expression" : "exact_match_results"
+        },
+        "force-flow-graph-solver" : false
+      },
+      "loop-iteration-merging-settings" : {
+        "column-matching" : "PrefixHashUnion",
+        "skip-incomplete" : false,
+        "custom-matched-columns-expression" : {
+          "expression" : ""
+        },
+        "annotation-merge-strategy" : "Merge",
+        "limit" : {
+          "content" : {
+            "value" : "0-9",
+            "is-expression" : false,
+            "expression" : {
+              "expression" : "MAKE_SEQUENCE(0, 10)"
+            }
+          },
+          "enabled" : false
+        },
+        "annotation-matching-method" : "ExactMatch",
+        "custom-annotation-matching" : {
+          "expression" : "exact_match_results"
+        },
+        "data-annotation-merge-strategy" : "MergeTables",
+        "force-flow-graph-solver" : false,
+        "force-na-is-any" : false
+      },
+      "output-settings" : {
+        "export-lightweight-data" : true,
+        "export-heavy-data" : true,
+        "export-loop-intermediate-results" : false,
+        "export-loop-terminating" : true,
+        "always-export-compartment-outputs" : true
+      },
+      "continue-on-failure-settings" : {
+        "continue-on-failure" : false,
+        "export-failed-loop-inputs" : true,
+        "export-failed-partition-inputs" : false,
+        "disable-on-update-cache" : false
+      },
+      "iteration-mode" : "PassThrough"
+    }, {
+      "name" : "Postprocessing",
+      "description" : "<html><head></head><body>Pre-defined partition useful for separating off postprocessing operations</body></html>",
+      "color" : {
+        "content" : "#C4B693",
+        "enabled" : true
+      },
+      "enable-parallelization" : false,
+      "force-pass-through-loop-iteration-in-caching" : false,
+      "loop-iteration-iterating-settings" : {
+        "column-matching" : "PrefixHashUnion",
+        "skip-incomplete" : false,
+        "custom-matched-columns-expression" : {
+          "expression" : ""
+        },
+        "annotation-merge-strategy" : "Merge",
+        "data-annotation-merge-strategy" : "MergeTables",
+        "limit" : {
+          "content" : {
+            "value" : "0-9",
+            "is-expression" : false,
+            "expression" : {
+              "expression" : "MAKE_SEQUENCE(0, 10)"
+            }
+          },
+          "enabled" : false
+        },
+        "annotation-matching-method" : "ExactMatch",
+        "custom-annotation-matching" : {
+          "expression" : "exact_match_results"
+        },
+        "force-flow-graph-solver" : false
+      },
+      "loop-iteration-merging-settings" : {
+        "column-matching" : "PrefixHashUnion",
+        "skip-incomplete" : false,
+        "custom-matched-columns-expression" : {
+          "expression" : ""
+        },
+        "annotation-merge-strategy" : "Merge",
+        "limit" : {
+          "content" : {
+            "value" : "0-9",
+            "is-expression" : false,
+            "expression" : {
+              "expression" : "MAKE_SEQUENCE(0, 10)"
+            }
+          },
+          "enabled" : false
+        },
+        "annotation-matching-method" : "ExactMatch",
+        "custom-annotation-matching" : {
+          "expression" : "exact_match_results"
+        },
+        "data-annotation-merge-strategy" : "MergeTables",
+        "force-flow-graph-solver" : false,
+        "force-na-is-any" : false
+      },
+      "output-settings" : {
+        "export-lightweight-data" : true,
+        "export-heavy-data" : true,
+        "export-loop-intermediate-results" : false,
+        "export-loop-terminating" : true,
+        "always-export-compartment-outputs" : true
+      },
+      "continue-on-failure-settings" : {
+        "continue-on-failure" : false,
+        "export-failed-loop-inputs" : true,
+        "export-failed-partition-inputs" : false,
+        "disable-on-update-cache" : false
+      },
+      "iteration-mode" : "PassThrough"
+    } ]
+  },
+  "run-sets" : {
+    "run-sets" : [ ]
+  },
+  "settings" : {
+    "org.hkijena.jipipe:ilastik" : {
+      "project-default-environment" : {
+        "content" : {
+          "name" : "",
+          "version" : "unknown",
+          "source" : "NA",
+          "load-from-artifact" : true,
+          "artifact-query" : {
+            "query" : "org.embl.ilastik:1.4.0-windows_amd64"
+          },
+          "arguments" : {
+            "expression" : "cli_parameters"
+          },
+          "executable-path" : ""
+        },
+        "enabled" : true
+      }
+    },
+    "org.hkijena.jipipe:cellpose" : {
+      "project-default-environment" : {
+        "content" : {
+          "name" : "",
+          "version" : "unknown",
+          "source" : "NA",
+          "load-from-artifact" : true,
+          "artifact-query" : {
+            "query" : "com.github.mouseland.cellpose:2.1.0.1000-windows_amd64"
+          },
+          "environment-type" : "System",
+          "arguments" : {
+            "expression" : "ARRAY(script_file)"
+          },
+          "executable-path" : ""
+        },
+        "enabled" : true
+      },
+      "project-cellpose3-environment" : {
+        "content" : {
+          "name" : "",
+          "version" : "unknown",
+          "source" : "NA",
+          "load-from-artifact" : true,
+          "artifact-query" : {
+            "query" : "com.github.mouseland.cellpose3:3.1.1.1.1001-win64_gpu_cu124_amd64"
+          },
+          "environment-type" : "System",
+          "arguments" : {
+            "expression" : "ARRAY(script_file)"
+          },
+          "executable-path" : ""
+        },
+        "enabled" : true
+      }
+    },
+    "org.hkijena.jipipe:r" : {
+      "project-default-environment" : {
+        "content" : {
+          "name" : "",
+          "version" : "unknown",
+          "source" : "NA",
+          "load-from-artifact" : true,
+          "artifact-query" : {
+            "query" : "org.r.r_prepackaged:4.4.0.1000-windows_amd64"
+          },
+          "arguments" : {
+            "expression" : "ARRAY(script_file)"
+          },
+          "r-executable-path" : "",
+          "rscript-executable-path" : ""
+        },
+        "enabled" : true
+      }
+    },
+    "org.hkijena.jipipe:omero" : {
+      "project-default-environment" : {
+        "content" : {
+          "name" : "",
+          "version" : "unknown",
+          "source" : "NA",
+          "host" : "omeroserver",
+          "port" : 4064,
+          "user-name" : "root",
+          "password" : "b21lcm8=",
+          "e-mail" : "anonymous@anonymous",
+          "webclient-url" : "http://localhost/webclient/"
+        },
+        "enabled" : true
+      }
+    },
+    "org.hkijena.jipipe:omnipose" : {
+      "project-default-environment" : {
+        "content" : {
+          "name" : "",
+          "version" : "unknown",
+          "source" : "NA",
+          "load-from-artifact" : true,
+          "artifact-query" : {
+            "query" : "com.github.kevinjohncutler.omnipose:0.2.1.1000-windows_amd64"
+          },
+          "environment-type" : "System",
+          "arguments" : {
+            "expression" : "ARRAY(script_file)"
+          },
+          "executable-path" : ""
+        },
+        "enabled" : true
+      }
+    },
+    "org.hkijena.jipipe:filaments" : {
+      "project-default-environment" : {
+        "content" : {
+          "name" : "",
+          "version" : "unknown",
+          "source" : "NA",
+          "load-from-artifact" : true,
+          "artifact-query" : {
+            "query" : "com.github.tix209.tsoax:0.2.0-windows_amd64"
+          },
+          "arguments" : {
+            "expression" : "cli_parameters"
+          },
+          "executable-path" : ""
+        },
+        "enabled" : true
+      }
+    },
+    "org.hkijena.jipipe:ij-ocr" : {
+      "project-default-environment" : {
+        "content" : {
+          "name" : "",
+          "version" : "unknown",
+          "source" : "NA",
+          "load-from-artifact" : true,
+          "artifact-query" : {
+            "query" : "com.github.tesseractocr.tesseract:5.5.0.1000-windows_amd64"
+          },
+          "arguments" : {
+            "expression" : "cli_parameters"
+          },
+          "executable-path" : ""
+        },
+        "enabled" : true
+      }
+    },
+    "org.hkijena.jipipe:samples-images" : {
+      "project-default-environment" : {
+        "content" : {
+          "name" : "",
+          "version" : "unknown",
+          "source" : "NA",
+          "load-from-artifact" : true,
+          "artifact-query" : {
+            "query" : "sc.fiji.sample_images:1.0.0.1000-any"
+          },
+          "directory" : ""
+        },
+        "enabled" : true
+      }
+    },
+    "org.hkijena.jipipe:python" : {
+      "project-default-environment" : {
+        "content" : {
+          "name" : "",
+          "version" : "unknown",
+          "source" : "NA",
+          "load-from-artifact" : true,
+          "artifact-query" : {
+            "query" : "org.python.python_prepackaged:3.10.15.1000-windows_amd64"
+          },
+          "environment-type" : "System",
+          "arguments" : {
+            "expression" : "ARRAY(script_file)"
+          },
+          "executable-path" : ""
+        },
+        "enabled" : true
+      },
+      "project-default-jipipe-adapter-environment" : {
+        "content" : {
+          "name" : "",
+          "version" : "unknown",
+          "source" : "NA",
+          "load-from-artifact" : true,
+          "artifact-query" : {
+            "query" : "org.hkijena.jipipe-python-adapter:0.3.0-any"
+          },
+          "library-directory" : "jipipe/lib-jipipe-python",
+          "provided-by-environment" : false
+        },
+        "enabled" : true
+      }
+    },
+    "org.hkijena.jipipe:data-storage" : {
+      "force-global-temp-directory" : false,
+      "override-temp-directory" : {
+        "content" : "",
+        "enabled" : false
+      }
+    }
+  },
+  "external-environments" : [ {
+    "name" : "",
+    "version" : "unknown",
+    "source" : "NA",
+    "host" : "omeroserver",
+    "port" : 4064,
+    "user-name" : "root",
+    "password" : "b21lcm8=",
+    "e-mail" : "anonymous@anonymous",
+    "webclient-url" : "http://localhost/webclient/"
+  } ],
+  "additional-metadata" : {
+    "org.hkijena.jipipe:pipeline-parameters" : {
+      "jipipe:type" : "jipipe:project-info-parameters",
+      "exported-parameters" : {
+        "parameter-reference-groups" : [ {
+          "content" : [ {
+            "custom-name" : "Autothreshold_Method",
+            "custom-description" : "<html>\n  <head>\n    \n  </head>\n  <body>\n    <p>\n      Choose a thresholding method from [Default, Huang, Minimum, Maximum, \n      Moments, Otsu, Percentile, Shanbhag, Triangle, Yen, ...]\n    </p>\n  </body>\n</html>\n",
+            "path" : "44f2cca2-b1b1-42da-af41-38157ede1c78/method"
+          } ],
+          "name" : "New group",
+          "description" : "<html><head></head><body></body></html>"
+        } ]
+      }
+    },
+    "org.hkijena.jipipe.ui:project-tabs" : {
+      "jipipe:type" : "jipipe:desktop:project-tabs",
+      "data" : {
+        "open-tabs" : [ "singleton:PROJECT_OVERVIEW", "singleton:COMPARTMENT_EDITOR", "graph-compartment:fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851" ],
+        "selected-tab" : "singleton:PROJECT_OVERVIEW"
+      }
+    }
+  },
+  "graph" : {
+    "nodes" : {
+      "44f2cca2-b1b1-42da-af41-38157ede1c78" : {
+        "jipipe:graph-compartment" : "fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851",
+        "jipipe:alias-id" : "auto-threshold-2d",
+        "jipipe:slot-configuration" : {
+          "input" : {
+            "Input" : {
+              "slot-data-type" : "imagej-imgplus-greyscale-8u",
+              "slot-type" : "Input",
+              "name" : "Input",
+              "custom-name" : null,
+              "description" : "",
+              "is-virtual" : false,
+              "save-outputs" : true,
+              "is-optional" : false
+            }
+          },
+          "output" : {
+            "Output" : {
+              "slot-data-type" : "imagej-imgplus-greyscale-mask",
+              "slot-type" : "Output",
+              "name" : "Output",
+              "custom-name" : null,
+              "description" : "",
+              "is-virtual" : false,
+              "save-outputs" : true,
+              "is-optional" : false
+            }
+          }
+        },
+        "jipipe:ui-grid-location" : {
+          "fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851" : {
+            "VerticalCompact" : {
+              "x" : 2,
+              "y" : 16
+            }
+          }
+        },
+        "jipipe:node-info-id" : "ij1-threshold-auto2d",
+        "jipipe:algorithm:enabled" : true,
+        "jipipe:node:ui-locked" : false,
+        "method" : "Default",
+        "dark-background" : true,
+        "slice-threshold-mode" : "ApplyPerSlice",
+        "jipipe:node:bookmarked" : false,
+        "threshold-annotation-strategy" : "OverwriteExisting",
+        "jipipe:algorithm:pass-through" : false,
+        "jipipe:node:name" : "Auto threshold 2D",
+        "jipipe:algorithm:runtime-partition" : {
+          "index" : 0
+        },
+        "jipipe:node:description" : "<html><head></head><body></body></html>",
+        "threshold-combine-expression" : {
+          "expression" : "MIN(thresholds)"
+        },
+        "source-area" : "WholeImage",
+        "jipipe:local-parallelization-num-threads" : {
+          "content" : 1,
+          "enabled" : false
+        },
+        "threshold-annotation" : {
+          "content" : "Threshold",
+          "enabled" : false
+        },
+        "jipipe:algorithm:custom-expression-variables" : {
+          "parameters" : { }
+        },
+        "jipipe:adaptive-parameters/attach-only-non-default-parameter-annotations" : true,
+        "jipipe:adaptive-parameters/attach-parameter-annotations" : true,
+        "jipipe:adaptive-parameters/parameter-annotations-prefix" : "",
+        "jipipe:adaptive-parameters/enabled" : true,
+        "jipipe:adaptive-parameters/overridden-parameters" : [ ],
+        "jipipe:adaptive-parameters/parameter-annotations-use-internal-names" : false,
+        "jipipe:parameter-slot-algorithm/has-parameter-slot" : false,
+        "jipipe:parameter-slot-algorithm/attach-only-non-default-parameter-annotations" : true,
+        "jipipe:parameter-slot-algorithm/attach-parameter-annotations" : true,
+        "jipipe:parameter-slot-algorithm/parameter-annotations-prefix" : "",
+        "jipipe:parameter-slot-algorithm/parameter-annotations-use-internal-names" : false,
+        "jipipe:data-batch-generation/annotation-merge-strategy" : "Merge",
+        "jipipe:data-batch-generation/column-matching" : "PrefixHashUnion",
+        "jipipe:data-batch-generation/data-annotation-merge-strategy" : "MergeTables",
+        "jipipe:data-batch-generation/custom-matched-columns-expression" : {
+          "expression" : ""
+        },
+        "jipipe:data-batch-generation/skip-incomplete" : false,
+        "jipipe:data-batch-generation/custom-annotation-matching" : {
+          "expression" : "exact_match_results"
+        },
+        "jipipe:data-batch-generation/limit" : {
+          "content" : {
+            "value" : "0-9",
+            "is-expression" : false,
+            "expression" : {
+              "expression" : "MAKE_SEQUENCE(0, 10)"
+            }
+          },
+          "enabled" : false
+        },
+        "jipipe:data-batch-generation/annotation-matching-method" : "ExactMatch",
+        "jipipe:data-batch-generation/force-flow-graph-solver" : false
+      },
+      "8ef8152f-8787-44b2-9cce-e54cb2f7e934" : {
+        "jipipe:graph-compartment" : "fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851",
+        "jipipe:alias-id" : "list-omero-images",
+        "jipipe:slot-configuration" : {
+          "input" : {
+            "Datasets" : {
+              "slot-data-type" : "omero-dataset-id",
+              "slot-type" : "Input",
+              "name" : "Datasets",
+              "custom-name" : null,
+              "description" : "",
+              "is-virtual" : false,
+              "save-outputs" : true,
+              "is-optional" : false
+            }
+          },
+          "output" : {
+            "Images" : {
+              "slot-data-type" : "omero-image-id",
+              "slot-type" : "Output",
+              "name" : "Images",
+              "custom-name" : null,
+              "description" : "",
+              "is-virtual" : false,
+              "save-outputs" : true,
+              "is-optional" : false
+            }
+          }
+        },
+        "jipipe:ui-grid-location" : {
+          "fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851" : {
+            "VerticalCompact" : {
+              "x" : 3,
+              "y" : 6
+            }
+          }
+        },
+        "jipipe:node-info-id" : "omero-list-image-ids",
+        "jipipe:algorithm:enabled" : true,
+        "jipipe:node:ui-locked" : false,
+        "jipipe:node:bookmarked" : false,
+        "jipipe:algorithm:pass-through" : false,
+        "jipipe:node:name" : "List OMERO images",
+        "jipipe:algorithm:runtime-partition" : {
+          "index" : 0
+        },
+        "jipipe:node:description" : "<html><head></head><body></body></html>",
+        "filter" : {
+          "expression" : ""
+        },
+        "override-credentials" : {
+          "content" : {
+            "name" : "",
+            "version" : "unknown",
+            "source" : "NA",
+            "host" : "localhost",
+            "port" : 4064,
+            "user-name" : "root",
+            "password" : "aW1hcmlzMTEx",
+            "e-mail" : "anonymous@anonymous",
+            "webclient-url" : "http://localhost/webclient/"
+          },
+          "enabled" : false
+        },
+        "jipipe:algorithm:custom-expression-variables" : {
+          "parameters" : { }
+        },
+        "jipipe:adaptive-parameters/attach-only-non-default-parameter-annotations" : true,
+        "jipipe:adaptive-parameters/attach-parameter-annotations" : true,
+        "jipipe:adaptive-parameters/parameter-annotations-prefix" : "",
+        "jipipe:adaptive-parameters/enabled" : true,
+        "jipipe:adaptive-parameters/overridden-parameters" : [ ],
+        "jipipe:adaptive-parameters/parameter-annotations-use-internal-names" : false,
+        "jipipe:parameter-slot-algorithm/has-parameter-slot" : false,
+        "jipipe:parameter-slot-algorithm/attach-only-non-default-parameter-annotations" : true,
+        "jipipe:parameter-slot-algorithm/attach-parameter-annotations" : true,
+        "jipipe:parameter-slot-algorithm/parameter-annotations-prefix" : "",
+        "jipipe:parameter-slot-algorithm/parameter-annotations-use-internal-names" : false,
+        "jipipe:data-batch-generation/annotation-merge-strategy" : "Merge",
+        "jipipe:data-batch-generation/data-annotation-merge-strategy" : "MergeTables"
+      },
+      "b155b441-1dbd-4c50-b41a-f67394fb018a" : {
+        "jipipe:graph-compartment" : "fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851",
+        "jipipe:alias-id" : "define-dataset-ids",
+        "jipipe:slot-configuration" : {
+          "input" : { },
+          "output" : {
+            "Output" : {
+              "slot-data-type" : "omero-dataset-id",
+              "slot-type" : "Output",
+              "name" : "Output",
+              "custom-name" : null,
+              "description" : "",
+              "is-virtual" : false,
+              "save-outputs" : true,
+              "is-optional" : false
+            }
+          }
+        },
+        "jipipe:ui-grid-location" : {
+          "fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851" : {
+            "VerticalCompact" : {
+              "x" : 3,
+              "y" : 1
+            }
+          }
+        },
+        "jipipe:node-info-id" : "omero-dataset-id-definition",
+        "jipipe:algorithm:enabled" : true,
+        "jipipe:node:ui-locked" : false,
+        "jipipe:node:bookmarked" : false,
+        "jipipe:algorithm:pass-through" : false,
+        "jipipe:node:name" : "Define dataset IDs NUMBER 1",
+        "jipipe:algorithm:runtime-partition" : {
+          "index" : 0
+        },
+        "jipipe:node:description" : "<html><head></head><body></body></html>",
+        "jipipe:local-parallelization-num-threads" : {
+          "content" : 1,
+          "enabled" : false
+        },
+        "override-credentials" : {
+          "content" : {
+            "name" : "",
+            "version" : "unknown",
+            "source" : "NA",
+            "host" : "localhost",
+            "port" : 4064,
+            "user-name" : "root",
+            "password" : "aW1hcmlzMTEx",
+            "e-mail" : "anonymous@anonymous",
+            "webclient-url" : "http://localhost/webclient/"
+          },
+          "enabled" : false
+        },
+        "dataset-ids" : [ 1 ],
+        "jipipe:algorithm:custom-expression-variables" : {
+          "parameters" : { }
+        },
+        "jipipe:adaptive-parameters/attach-only-non-default-parameter-annotations" : true,
+        "jipipe:adaptive-parameters/attach-parameter-annotations" : true,
+        "jipipe:adaptive-parameters/parameter-annotations-prefix" : "",
+        "jipipe:adaptive-parameters/enabled" : true,
+        "jipipe:adaptive-parameters/overridden-parameters" : [ ],
+        "jipipe:adaptive-parameters/parameter-annotations-use-internal-names" : false,
+        "jipipe:parameter-slot-algorithm/has-parameter-slot" : false,
+        "jipipe:parameter-slot-algorithm/attach-only-non-default-parameter-annotations" : true,
+        "jipipe:parameter-slot-algorithm/attach-parameter-annotations" : true,
+        "jipipe:parameter-slot-algorithm/parameter-annotations-prefix" : "",
+        "jipipe:parameter-slot-algorithm/parameter-annotations-use-internal-names" : false,
+        "jipipe:data-batch-generation/limit" : {
+          "content" : {
+            "value" : "0-9",
+            "is-expression" : false,
+            "expression" : {
+              "expression" : "MAKE_SEQUENCE(0, 10)"
+            }
+          },
+          "enabled" : false
+        }
+      },
+      "360d9f0f-7069-4e88-a7c1-301cef4f2346" : {
+        "jipipe:graph-compartment" : "fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851",
+        "jipipe:alias-id" : "download-image-from-omero",
+        "jipipe:slot-configuration" : {
+          "input" : {
+            "Input" : {
+              "slot-data-type" : "omero-image-id",
+              "slot-type" : "Input",
+              "name" : "Input",
+              "custom-name" : null,
+              "description" : "",
+              "is-virtual" : false,
+              "save-outputs" : true,
+              "is-optional" : false
+            }
+          },
+          "output" : {
+            "Output" : {
+              "slot-data-type" : "imagej-ome",
+              "slot-type" : "Output",
+              "name" : "Output",
+              "custom-name" : null,
+              "description" : "",
+              "is-virtual" : false,
+              "save-outputs" : true,
+              "is-optional" : false
+            }
+          }
+        },
+        "jipipe:ui-grid-location" : {
+          "fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851" : {
+            "VerticalCompact" : {
+              "x" : 2,
+              "y" : 11
+            }
+          }
+        },
+        "jipipe:node-info-id" : "omero-download-image",
+        "jipipe:algorithm:enabled" : true,
+        "jipipe:node:ui-locked" : false,
+        "id-annotation" : {
+          "content" : "#OMERO:Image_ID",
+          "enabled" : true
+        },
+        "jipipe:node:bookmarked" : false,
+        "jipipe:algorithm:pass-through" : false,
+        "jipipe:node:name" : "Download image from OMERO",
+        "jipipe:algorithm:runtime-partition" : {
+          "index" : 0
+        },
+        "jipipe:node:description" : "<html><head></head><body></body></html>",
+        "title-annotation" : {
+          "content" : "#Image",
+          "enabled" : true
+        },
+        "jipipe:local-parallelization-num-threads" : {
+          "content" : 1,
+          "enabled" : false
+        },
+        "override-credentials" : {
+          "content" : {
+            "name" : "localhost",
+            "version" : "unknown",
+            "source" : "NA",
+            "host" : "localhost",
+            "port" : 4064,
+            "user-name" : "root",
+            "password" : "aW1hcmlzMTEx",
+            "e-mail" : "anonymous@anonymous",
+            "webclient-url" : "http://localhost/webclient/"
+          },
+          "enabled" : false
+        },
+        "jipipe:algorithm:custom-expression-variables" : {
+          "parameters" : { }
+        },
+        "key-value-pair-to-annotation-importer/filter" : {
+          "expression" : "true"
+        },
+        "key-value-pair-to-annotation-importer/annotation-name" : {
+          "expression" : "\"OMERO:KV:\" + key"
+        },
+        "key-value-pair-to-annotation-importer/annotation-value" : {
+          "expression" : "value"
+        },
+        "key-value-pair-to-annotation-importer/enabled" : true,
+        "jipipe:adaptive-parameters/attach-only-non-default-parameter-annotations" : true,
+        "jipipe:adaptive-parameters/attach-parameter-annotations" : true,
+        "jipipe:adaptive-parameters/parameter-annotations-prefix" : "",
+        "jipipe:adaptive-parameters/enabled" : true,
+        "jipipe:adaptive-parameters/overridden-parameters" : [ ],
+        "jipipe:adaptive-parameters/parameter-annotations-use-internal-names" : false,
+        "image-import-parameters/split-time-points" : false,
+        "image-import-parameters/concatenate" : false,
+        "image-import-parameters/stitch-tiles" : false,
+        "image-import-parameters/extract-rois" : true,
+        "image-import-parameters/stack-order" : "XYCZT",
+        "image-import-parameters/split-channels" : false,
+        "image-import-parameters/crop-regions" : [ ],
+        "image-import-parameters/color-mode" : "Default",
+        "image-import-parameters/split-focal-planes" : false,
+        "image-import-parameters/swap-dimensions" : false,
+        "image-import-parameters/crop" : false,
+        "image-import-parameters/auto-scale" : true,
+        "tag-to-annotation-importer/tags-to-list-annotation" : {
+          "content" : "OMERO:Tags",
+          "enabled" : true
+        },
+        "tag-to-annotation-importer/tags-to-list-annotation-filter" : {
+          "expression" : "true"
+        },
+        "jipipe:parameter-slot-algorithm/has-parameter-slot" : false,
+        "jipipe:parameter-slot-algorithm/attach-only-non-default-parameter-annotations" : true,
+        "jipipe:parameter-slot-algorithm/attach-parameter-annotations" : true,
+        "jipipe:parameter-slot-algorithm/parameter-annotations-prefix" : "",
+        "jipipe:parameter-slot-algorithm/parameter-annotations-use-internal-names" : false,
+        "jipipe:data-batch-generation/limit" : {
+          "content" : {
+            "value" : "0-9",
+            "is-expression" : false,
+            "expression" : {
+              "expression" : "MAKE_SEQUENCE(0, 10)"
+            }
+          },
+          "enabled" : false
+        }
+      },
+      "27657e4c-6f28-4395-b319-bb0b774b56b0" : {
+        "jipipe:graph-compartment" : "fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851",
+        "jipipe:alias-id" : "upload-image-to-omero",
+        "jipipe:slot-configuration" : {
+          "input" : {
+            "Images" : {
+              "slot-data-type" : "imagej-ome",
+              "slot-type" : "Input",
+              "name" : "Images",
+              "custom-name" : null,
+              "description" : "The image(s) to upload",
+              "is-virtual" : false,
+              "save-outputs" : true,
+              "is-optional" : false
+            },
+            "Target dataset" : {
+              "slot-data-type" : "omero-dataset-id",
+              "slot-type" : "Input",
+              "name" : "Target dataset",
+              "custom-name" : null,
+              "description" : "The data set where the image(s) will be stored",
+              "is-virtual" : false,
+              "save-outputs" : true,
+              "is-optional" : false
+            }
+          },
+          "output" : {
+            "Images" : {
+              "slot-data-type" : "omero-image-id",
+              "slot-type" : "Output",
+              "name" : "Images",
+              "custom-name" : null,
+              "description" : "Reference to the uploaded image(s)",
+              "is-virtual" : false,
+              "save-outputs" : true,
+              "is-optional" : false
+            }
+          }
+        },
+        "jipipe:ui-grid-location" : {
+          "fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851" : {
+            "VerticalCompact" : {
+              "x" : 1,
+              "y" : 25
+            }
+          }
+        },
+        "jipipe:node-info-id" : "omero-upload-image",
+        "jipipe:algorithm:enabled" : true,
+        "jipipe:node:ui-locked" : false,
+        "jipipe:node:bookmarked" : false,
+        "jipipe:algorithm:pass-through" : false,
+        "jipipe:node:name" : "Upload image to OMERO",
+        "jipipe:algorithm:runtime-partition" : {
+          "index" : 0
+        },
+        "jipipe:node:description" : "<html><head></head><body></body></html>",
+        "file-name-generator" : {
+          "expression" : "#Image"
+        },
+        "jipipe:local-parallelization-num-threads" : {
+          "content" : 1,
+          "enabled" : false
+        },
+        "override-credentials" : {
+          "content" : {
+            "name" : "",
+            "version" : "unknown",
+            "source" : "NA",
+            "host" : "",
+            "port" : 4064,
+            "user-name" : "",
+            "password" : "",
+            "e-mail" : "anonymous@anonymous",
+            "webclient-url" : ""
+          },
+          "enabled" : false
+        },
+        "tag-exporter/tag-list-annotation" : {
+          "content" : "OMERO:Tags",
+          "enabled" : true
+        },
+        "jipipe:algorithm:custom-expression-variables" : {
+          "parameters" : { }
+        },
+        "jipipe:adaptive-parameters/attach-only-non-default-parameter-annotations" : true,
+        "jipipe:adaptive-parameters/attach-parameter-annotations" : true,
+        "jipipe:adaptive-parameters/parameter-annotations-prefix" : "",
+        "jipipe:adaptive-parameters/enabled" : true,
+        "jipipe:adaptive-parameters/overridden-parameters" : [ ],
+        "jipipe:adaptive-parameters/parameter-annotations-use-internal-names" : false,
+        "jipipe:parameter-slot-algorithm/has-parameter-slot" : false,
+        "jipipe:parameter-slot-algorithm/attach-only-non-default-parameter-annotations" : true,
+        "jipipe:parameter-slot-algorithm/attach-parameter-annotations" : true,
+        "jipipe:parameter-slot-algorithm/parameter-annotations-prefix" : "",
+        "jipipe:parameter-slot-algorithm/parameter-annotations-use-internal-names" : false,
+        "key-value-pair-exporter/filter" : {
+          "expression" : "STRING_STARTS_WITH(key, \"OMERO:KV:\")"
+        },
+        "key-value-pair-exporter/key-value-pair-key" : {
+          "expression" : "REPLACE_IN_STRING(key, \"OMERO:KV:\", \"\")"
+        },
+        "key-value-pair-exporter/key-value-pair-value" : {
+          "expression" : "value"
+        },
+        "key-value-pair-exporter/enabled" : true,
+        "jipipe:data-batch-generation/annotation-merge-strategy" : "Merge",
+        "jipipe:data-batch-generation/column-matching" : "PrefixHashUnion",
+        "jipipe:data-batch-generation/data-annotation-merge-strategy" : "MergeTables",
+        "jipipe:data-batch-generation/custom-matched-columns-expression" : {
+          "expression" : ""
+        },
+        "jipipe:data-batch-generation/skip-incomplete" : false,
+        "jipipe:data-batch-generation/custom-annotation-matching" : {
+          "expression" : "exact_match_results"
+        },
+        "jipipe:data-batch-generation/limit" : {
+          "content" : {
+            "value" : "0-9",
+            "is-expression" : false,
+            "expression" : {
+              "expression" : "MAKE_SEQUENCE(0, 10)"
+            }
+          },
+          "enabled" : false
+        },
+        "jipipe:data-batch-generation/annotation-matching-method" : "ExactMatch",
+        "jipipe:data-batch-generation/force-flow-graph-solver" : false
+      },
+      "2a4bb4b5-01d0-43ef-b570-19c818442a04" : {
+        "jipipe:graph-compartment" : "fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851",
+        "jipipe:alias-id" : "create-omero-dataset",
+        "jipipe:slot-configuration" : {
+          "input" : {
+            "Project" : {
+              "slot-data-type" : "omero-project-id",
+              "slot-type" : "Input",
+              "name" : "Project",
+              "custom-name" : null,
+              "description" : "The project that will contain the dataset",
+              "is-virtual" : false,
+              "save-outputs" : true,
+              "is-optional" : false
+            }
+          },
+          "output" : {
+            "Dataset" : {
+              "slot-data-type" : "omero-dataset-id",
+              "slot-type" : "Output",
+              "name" : "Dataset",
+              "custom-name" : null,
+              "description" : "The created dataset",
+              "is-virtual" : false,
+              "save-outputs" : true,
+              "is-optional" : false
+            }
+          }
+        },
+        "jipipe:ui-grid-location" : {
+          "fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851" : {
+            "VerticalCompact" : {
+              "x" : 11,
+              "y" : 21
+            }
+          }
+        },
+        "jipipe:node-info-id" : "omero-create-dataset",
+        "name-generator" : {
+          "expression" : "GET_DATE_YEAR() + \"-\" + GET_DATE_MONTH() + \"-\" + GET_DATE_DAY()+ \" \" + GET_TIME_HOUR() + \":\" + GET_TIME_MINUTE() + \":\" + GET_TIME_SECOND()"
+        },
+        "jipipe:algorithm:enabled" : true,
+        "jipipe:node:ui-locked" : false,
+        "jipipe:node:bookmarked" : false,
+        "jipipe:algorithm:pass-through" : false,
+        "jipipe:node:name" : "Create OMERO dataset",
+        "jipipe:algorithm:runtime-partition" : {
+          "index" : 0
+        },
+        "jipipe:node:description" : "<html><head></head><body></body></html>",
+        "jipipe:local-parallelization-num-threads" : {
+          "content" : 1,
+          "enabled" : false
+        },
+        "override-credentials" : {
+          "content" : {
+            "name" : "",
+            "version" : "unknown",
+            "source" : "NA",
+            "host" : "",
+            "port" : 4064,
+            "user-name" : "",
+            "password" : "",
+            "e-mail" : "anonymous@anonymous",
+            "webclient-url" : ""
+          },
+          "enabled" : false
+        },
+        "tag-exporter/tag-list-annotation" : {
+          "content" : "OMERO:Tags",
+          "enabled" : true
+        },
+        "jipipe:algorithm:custom-expression-variables" : {
+          "parameters" : { }
+        },
+        "jipipe:adaptive-parameters/attach-only-non-default-parameter-annotations" : true,
+        "jipipe:adaptive-parameters/attach-parameter-annotations" : true,
+        "jipipe:adaptive-parameters/parameter-annotations-prefix" : "",
+        "jipipe:adaptive-parameters/enabled" : true,
+        "jipipe:adaptive-parameters/overridden-parameters" : [ ],
+        "jipipe:adaptive-parameters/parameter-annotations-use-internal-names" : false,
+        "jipipe:parameter-slot-algorithm/has-parameter-slot" : false,
+        "jipipe:parameter-slot-algorithm/attach-only-non-default-parameter-annotations" : true,
+        "jipipe:parameter-slot-algorithm/attach-parameter-annotations" : true,
+        "jipipe:parameter-slot-algorithm/parameter-annotations-prefix" : "",
+        "jipipe:parameter-slot-algorithm/parameter-annotations-use-internal-names" : false,
+        "key-value-pair-exporter/filter" : {
+          "expression" : "STRING_STARTS_WITH(key, \"OMERO:KV:\")"
+        },
+        "key-value-pair-exporter/key-value-pair-key" : {
+          "expression" : "REPLACE_IN_STRING(key, \"OMERO:KV:\", \"\")"
+        },
+        "key-value-pair-exporter/key-value-pair-value" : {
+          "expression" : "value"
+        },
+        "key-value-pair-exporter/enabled" : true,
+        "jipipe:data-batch-generation/limit" : {
+          "content" : {
+            "value" : "0-9",
+            "is-expression" : false,
+            "expression" : {
+              "expression" : "MAKE_SEQUENCE(0, 10)"
+            }
+          },
+          "enabled" : false
+        }
+      },
+      "87913f5b-a17c-4404-ad9c-05d8fe19021b" : {
+        "jipipe:graph-compartment" : "fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851",
+        "jipipe:alias-id" : "define-project-ids",
+        "jipipe:slot-configuration" : {
+          "input" : { },
+          "output" : {
+            "Output" : {
+              "slot-data-type" : "omero-project-id",
+              "slot-type" : "Output",
+              "name" : "Output",
+              "custom-name" : null,
+              "description" : "",
+              "is-virtual" : false,
+              "save-outputs" : true,
+              "is-optional" : false
+            }
+          }
+        },
+        "jipipe:ui-grid-location" : {
+          "fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851" : {
+            "VerticalCompact" : {
+              "x" : 13,
+              "y" : 16
+            }
+          }
+        },
+        "jipipe:node-info-id" : "omero-project-id-definition",
+        "jipipe:algorithm:enabled" : true,
+        "jipipe:node:ui-locked" : false,
+        "jipipe:node:bookmarked" : false,
+        "jipipe:algorithm:pass-through" : false,
+        "jipipe:node:name" : "Define project IDs",
+        "jipipe:algorithm:runtime-partition" : {
+          "index" : 0
+        },
+        "jipipe:node:description" : "<html><head></head><body></body></html>",
+        "jipipe:local-parallelization-num-threads" : {
+          "content" : 1,
+          "enabled" : false
+        },
+        "override-credentials" : {
+          "content" : {
+            "name" : "localhost",
+            "version" : "unknown",
+            "source" : "NA",
+            "host" : "localhost",
+            "port" : 4064,
+            "user-name" : "root",
+            "password" : "aW1hcmlzMTEx",
+            "e-mail" : "anonymous@anonymous",
+            "webclient-url" : "http://localhost/webclient/"
+          },
+          "enabled" : false
+        },
+        "dataset-ids" : [ 0 ],
+        "jipipe:algorithm:custom-expression-variables" : {
+          "parameters" : { }
+        },
+        "jipipe:adaptive-parameters/attach-only-non-default-parameter-annotations" : true,
+        "jipipe:adaptive-parameters/attach-parameter-annotations" : true,
+        "jipipe:adaptive-parameters/parameter-annotations-prefix" : "",
+        "jipipe:adaptive-parameters/enabled" : true,
+        "jipipe:adaptive-parameters/overridden-parameters" : [ ],
+        "jipipe:adaptive-parameters/parameter-annotations-use-internal-names" : false,
+        "jipipe:parameter-slot-algorithm/has-parameter-slot" : false,
+        "jipipe:parameter-slot-algorithm/attach-only-non-default-parameter-annotations" : true,
+        "jipipe:parameter-slot-algorithm/attach-parameter-annotations" : true,
+        "jipipe:parameter-slot-algorithm/parameter-annotations-prefix" : "",
+        "jipipe:parameter-slot-algorithm/parameter-annotations-use-internal-names" : false,
+        "jipipe:data-batch-generation/limit" : {
+          "content" : {
+            "value" : "0-9",
+            "is-expression" : false,
+            "expression" : {
+              "expression" : "MAKE_SEQUENCE(0, 10)"
+            }
+          },
+          "enabled" : false
+        }
+      },
+      "fe470771-9602-4099-8192-9be5e8751c8e" : {
+        "jipipe:graph-compartment" : "fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851",
+        "jipipe:alias-id" : "define-project-ids-1",
+        "jipipe:slot-configuration" : {
+          "input" : { },
+          "output" : {
+            "Output" : {
+              "slot-data-type" : "omero-project-id",
+              "slot-type" : "Output",
+              "name" : "Output",
+              "custom-name" : null,
+              "description" : "",
+              "is-virtual" : false,
+              "save-outputs" : true,
+              "is-optional" : false
+            }
+          }
+        },
+        "jipipe:ui-grid-location" : {
+          "" : {
+            "VerticalCompact" : {
+              "x" : 45,
+              "y" : 18
+            }
+          },
+          "fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851" : {
+            "VerticalCompact" : {
+              "x" : 45,
+              "y" : 18
+            }
+          }
+        },
+        "jipipe:node-info-id" : "omero-project-id-definition",
+        "jipipe:algorithm:enabled" : true,
+        "jipipe:node:ui-locked" : false,
+        "jipipe:node:bookmarked" : false,
+        "jipipe:algorithm:pass-through" : false,
+        "jipipe:node:name" : "Define project IDs NUMBER 2",
+        "jipipe:algorithm:runtime-partition" : {
+          "index" : 0
+        },
+        "jipipe:node:description" : "<html><head></head><body></body></html>",
+        "jipipe:local-parallelization-num-threads" : {
+          "content" : 1,
+          "enabled" : false
+        },
+        "override-credentials" : {
+          "content" : {
+            "name" : "",
+            "version" : "unknown",
+            "source" : "NA",
+            "host" : "localhost",
+            "port" : 4064,
+            "user-name" : "root",
+            "password" : "aW1hcmlzMTEx",
+            "e-mail" : "anonymous@anonymous",
+            "webclient-url" : "http://localhost/webclient/"
+          },
+          "enabled" : false
+        },
+        "dataset-ids" : [ ],
+        "jipipe:algorithm:custom-expression-variables" : {
+          "parameters" : { }
+        },
+        "jipipe:adaptive-parameters/attach-only-non-default-parameter-annotations" : true,
+        "jipipe:adaptive-parameters/attach-parameter-annotations" : true,
+        "jipipe:adaptive-parameters/parameter-annotations-prefix" : "",
+        "jipipe:adaptive-parameters/enabled" : true,
+        "jipipe:adaptive-parameters/overridden-parameters" : [ ],
+        "jipipe:adaptive-parameters/parameter-annotations-use-internal-names" : false,
+        "jipipe:parameter-slot-algorithm/has-parameter-slot" : false,
+        "jipipe:parameter-slot-algorithm/attach-only-non-default-parameter-annotations" : true,
+        "jipipe:parameter-slot-algorithm/attach-parameter-annotations" : true,
+        "jipipe:parameter-slot-algorithm/parameter-annotations-prefix" : "",
+        "jipipe:parameter-slot-algorithm/parameter-annotations-use-internal-names" : false,
+        "jipipe:data-batch-generation/limit" : {
+          "content" : {
+            "value" : "0-9",
+            "is-expression" : false,
+            "expression" : {
+              "expression" : "MAKE_SEQUENCE(0, 10)"
+            }
+          },
+          "enabled" : false
+        }
+      },
+      "8f46c3c9-0132-4d86-b00f-3c89190b0f79" : {
+        "jipipe:graph-compartment" : "fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851",
+        "jipipe:alias-id" : "define-project-ids-2",
+        "jipipe:slot-configuration" : {
+          "input" : { },
+          "output" : {
+            "Output" : {
+              "slot-data-type" : "omero-project-id",
+              "slot-type" : "Output",
+              "name" : "Output",
+              "custom-name" : null,
+              "description" : "",
+              "is-virtual" : false,
+              "save-outputs" : true,
+              "is-optional" : false
+            }
+          }
+        },
+        "jipipe:ui-grid-location" : {
+          "" : {
+            "VerticalCompact" : {
+              "x" : 44,
+              "y" : 27
+            }
+          },
+          "fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851" : {
+            "VerticalCompact" : {
+              "x" : 44,
+              "y" : 27
+            }
+          }
+        },
+        "jipipe:node-info-id" : "omero-project-id-definition",
+        "jipipe:algorithm:enabled" : true,
+        "jipipe:node:ui-locked" : false,
+        "jipipe:node:bookmarked" : false,
+        "jipipe:algorithm:pass-through" : false,
+        "jipipe:node:name" : "Define project IDs NUMBER 3",
+        "jipipe:algorithm:runtime-partition" : {
+          "index" : 0
+        },
+        "jipipe:node:description" : "<html><head></head><body></body></html>",
+        "jipipe:local-parallelization-num-threads" : {
+          "content" : 1,
+          "enabled" : false
+        },
+        "override-credentials" : {
+          "content" : {
+            "name" : "",
+            "version" : "unknown",
+            "source" : "NA",
+            "host" : "localhost",
+            "port" : 4064,
+            "user-name" : "root",
+            "password" : "aW1hcmlzMTEx",
+            "e-mail" : "anonymous@anonymous",
+            "webclient-url" : "http://localhost/webclient/"
+          },
+          "enabled" : false
+        },
+        "dataset-ids" : [ ],
+        "jipipe:algorithm:custom-expression-variables" : {
+          "parameters" : { }
+        },
+        "jipipe:adaptive-parameters/attach-only-non-default-parameter-annotations" : true,
+        "jipipe:adaptive-parameters/attach-parameter-annotations" : true,
+        "jipipe:adaptive-parameters/parameter-annotations-prefix" : "",
+        "jipipe:adaptive-parameters/enabled" : true,
+        "jipipe:adaptive-parameters/overridden-parameters" : [ ],
+        "jipipe:adaptive-parameters/parameter-annotations-use-internal-names" : false,
+        "jipipe:parameter-slot-algorithm/has-parameter-slot" : false,
+        "jipipe:parameter-slot-algorithm/attach-only-non-default-parameter-annotations" : true,
+        "jipipe:parameter-slot-algorithm/attach-parameter-annotations" : true,
+        "jipipe:parameter-slot-algorithm/parameter-annotations-prefix" : "",
+        "jipipe:parameter-slot-algorithm/parameter-annotations-use-internal-names" : false,
+        "jipipe:data-batch-generation/limit" : {
+          "content" : {
+            "value" : "0-9",
+            "is-expression" : false,
+            "expression" : {
+              "expression" : "MAKE_SEQUENCE(0, 10)"
+            }
+          },
+          "enabled" : false
+        }
+      }
+    },
+    "edges" : [ {
+      "source-node" : "44f2cca2-b1b1-42da-af41-38157ede1c78",
+      "target-node" : "27657e4c-6f28-4395-b319-bb0b774b56b0",
+      "source-slot" : "Output",
+      "target-slot" : "Images",
+      "metadata" : {
+        "ui-visibility" : "Smart",
+        "ui-shape" : "Elbow"
+      }
+    }, {
+      "source-node" : "b155b441-1dbd-4c50-b41a-f67394fb018a",
+      "target-node" : "8ef8152f-8787-44b2-9cce-e54cb2f7e934",
+      "source-slot" : "Output",
+      "target-slot" : "Datasets",
+      "metadata" : {
+        "ui-visibility" : "Smart",
+        "ui-shape" : "Elbow"
+      }
+    }, {
+      "source-node" : "2a4bb4b5-01d0-43ef-b570-19c818442a04",
+      "target-node" : "27657e4c-6f28-4395-b319-bb0b774b56b0",
+      "source-slot" : "Dataset",
+      "target-slot" : "Target dataset",
+      "metadata" : {
+        "ui-visibility" : "Smart",
+        "ui-shape" : "Elbow"
+      }
+    }, {
+      "source-node" : "360d9f0f-7069-4e88-a7c1-301cef4f2346",
+      "target-node" : "44f2cca2-b1b1-42da-af41-38157ede1c78",
+      "source-slot" : "Output",
+      "target-slot" : "Input",
+      "metadata" : {
+        "ui-visibility" : "Smart",
+        "ui-shape" : "Elbow"
+      }
+    }, {
+      "source-node" : "8ef8152f-8787-44b2-9cce-e54cb2f7e934",
+      "target-node" : "360d9f0f-7069-4e88-a7c1-301cef4f2346",
+      "source-slot" : "Images",
+      "target-slot" : "Input",
+      "metadata" : {
+        "ui-visibility" : "Smart",
+        "ui-shape" : "Elbow"
+      }
+    }, {
+      "source-node" : "87913f5b-a17c-4404-ad9c-05d8fe19021b",
+      "target-node" : "2a4bb4b5-01d0-43ef-b570-19c818442a04",
+      "source-slot" : "Output",
+      "target-slot" : "Project",
+      "metadata" : {
+        "ui-visibility" : "Smart",
+        "ui-shape" : "Elbow"
+      }
+    } ]
+  },
+  "compartments" : {
+    "compartment-graph" : {
+      "nodes" : {
+        "fb3bfe3a-c9c1-4ec4-908b-3f1b7380a851" : {
+          "jipipe:graph-compartment" : "",
+          "jipipe:alias-id" : "analysis",
+          "jipipe:slot-configuration" : {
+            "input" : {
+              "Input" : {
+                "slot-data-type" : "jipipe:compartment-output",
+                "slot-type" : "Input",
+                "name" : "Input",
+                "custom-name" : null,
+                "description" : "Incoming data from other compartments",
+                "is-virtual" : false,
+                "save-outputs" : true,
+                "is-optional" : true
+              }
+            },
+            "output" : { }
+          },
+          "jipipe:ui-grid-location" : {
+            "" : {
+              "Vertical" : {
+                "x" : 1,
+                "y" : 1
+              },
+              "VerticalCompact" : {
+                "x" : 1,
+                "y" : 1
+              }
+            }
+          },
+          "jipipe:node-info-id" : "jipipe:project-compartment",
+          "jipipe:node:ui-locked" : false,
+          "show-limited-parameters" : false,
+          "exported-parameters" : {
+            "parameter-reference-groups" : [ ]
+          },
+          "project-overview-color" : {
+            "content" : "#FFFFFF",
+            "enabled" : false
+          },
+          "show-in-project-overview" : true,
+          "jipipe:node:bookmarked" : false,
+          "jipipe:node:name" : "Analysis",
+          "jipipe:node:description" : "<html><head></head><body></body></html>"
+        }
+      },
+      "edges" : [ ]
+    }
+  }
+}

@@ -1,0 +1,15 @@
+FROM openmicroscopy/omero-web-standalone:5
+
+USER root
+
+# Install JIPipeRunner
+RUN /opt/omero/web/venv3/bin/pip install git+https://asb-git.hki-jena.de/MWank/OMERO_JIPipe_Plugin.git
+
+# ---- INSTALL PLUGIN DEPENDENCIES ----
+COPY requirements.txt /tmp/requirements.txt
+RUN /opt/omero/web/venv3/bin/pip install -r /tmp/requirements.txt && rm /tmp/requirements.txt
+
+# ---- REGISTER OMERO.web PLUGIN and start Omeroweb via entrypoint----
+COPY omeroweb_entrypoint.sh /opt/omeroweb_entrypoint.sh
+RUN chmod +x /opt/omeroweb_entrypoint.sh
+ENTRYPOINT ["/opt/omeroweb_entrypoint.sh"]
