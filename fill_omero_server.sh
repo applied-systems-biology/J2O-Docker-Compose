@@ -11,6 +11,13 @@ for i in {1..15}; do
   sleep 5
 done
 
+# Check for existing project
+echo "Checking if data has already been populated..."
+if /opt/omero/server/venv3/bin/omero obj get Project:1 &>/dev/null; then
+  echo "Project:1 exists. Assuming OMERO is already populated. Skipping."
+  exit 0
+fi
+
 # perform all OMERO‐CLI steps as omero-server user
 /opt/omero/server/venv3/bin/omero login -s "$OMERO_HOST:$OMERO_PORT" -u "$OMERO_USER" -w "$OMERO_PASSWORD"
 

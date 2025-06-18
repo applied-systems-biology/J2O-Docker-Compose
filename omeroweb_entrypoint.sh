@@ -21,8 +21,11 @@ su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero web syncmedia"
 su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config set omero.web.debug True"
 
 # Plugin setup
-su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config append omero.web.apps '\"JIPipeRunner\"'"
-su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config append omero.web.ui.right_plugins '[\"JIPipeRunner\", \"JIPipeRunner/right_plugin_example.js.html\", \"jipipe_form_container\"]'"
+existing_apps=$(su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config get omero.web.apps")
+if [[ "$existing_apps" != *"JIPipeRunner"* ]]; then
+        su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config append omero.web.apps '\"JIPipeRunner\"'"
+        su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config append omero.web.ui.right_plugins '[\"JIPipeRunner\", \"JIPipeRunner/right_plugin_example.js.html\", \"jipipe_form_container\"]'"
+fi
 su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config set omero.web.imagej \"/opt/Fiji.app/ImageJ-linux64\""
 
 # Redis cache config
