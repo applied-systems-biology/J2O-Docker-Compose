@@ -15,8 +15,8 @@ The initial password can be changed in [`docker-compose.yml`](docker-compose.yml
 
 First pull the latest major versions of the containers:
 
-    docker-compose pull
+    docker compose pull
 
 Then start the containers:
 
-    docker-compose up
+    docker compose up
