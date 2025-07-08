@@ -2,7 +2,11 @@ FROM openmicroscopy/omero-web-standalone:5
 USER root
 
 # Install JIPipeRunner
-RUN /opt/omero/web/venv3/bin/pip install git+https://asb-git.hki-jena.de/MWank/OMERO_JIPipe_Plugin.git
+WORKDIR /opt
+RUN git clone https://asb-git.hki-jena.de/MWank/OMERO_JIPipe_Plugin.git
+WORKDIR /opt/OMERO_JIPipe_Plugin
+RUN git reset --hard cd7e5303
+RUN /opt/omero/web/venv3/bin/pip install /opt/OMERO_JIPipe_Plugin
 
 # Install tools and Java runtime for Fiji
 RUN dnf install -y java-17-openjdk-headless xorg-x11-server-Xvfb && dnf clean all
