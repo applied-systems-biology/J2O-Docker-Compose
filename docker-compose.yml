@@ -38,7 +38,9 @@ services:
         hard: 65536
 
   fill-omero-server:
-    image: "openmicroscopy/omero-server:5"
+    build:
+      context: .
+      dockerfile: Dockerfile.fill_omero
     depends_on:
       - database
       - omeroserver
@@ -56,9 +58,6 @@ services:
       - omero
     volumes:
       - "omero:/OMERO"
-      - ./:/workdir
-    working_dir: /workdir
-    entrypoint: ["./fill_omero_server.sh"]
 
   omeroweb:
     build:

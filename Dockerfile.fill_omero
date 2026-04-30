@@ -1,0 +1,9 @@
+FROM openmicroscopy/omero-server:5
+
+WORKDIR /workdir
+COPY fill_omero_server.sh /workdir/fill_omero_server.sh
+COPY ExampleFiles /workdir/ExampleFiles
+
+RUN sed -i 's/\r$//' /workdir/fill_omero_server.sh && chmod +x /workdir/fill_omero_server.sh
+
+ENTRYPOINT ["/bin/bash", "/workdir/fill_omero_server.sh"]

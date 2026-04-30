@@ -11,10 +11,35 @@ for i in {1..15}; do
   sleep 5
 done
 
-# Check for existing project
-echo "Checking if data has already been populated..."
-if /opt/omero/server/venv3/bin/omero obj get Project:1 &>/dev/null; then
-  echo "Project:1 exists. Assuming OMERO is already populated. Skipping."
+echo "Checking if any Project exists..."
+
+RAW_PROJECT_COUNT_OUTPUT=$(
+  /opt/omero/server/venv3/bin/omero hql \
+    "select count(p.id) from Project p" 2>&1
+)
+
+echo "$RAW_PROJECT_COUNT_OUTPUT"
+
+PROJECT_COUNT=$(
+  echo "$RAW_PROJECT_COUNT_OUTPUT" |
+  awk -F'|' '
+    $1 ~ /^[[:space:]]*[0-9]+[[:space:]]*$/ {
+      gsub(/^[[:space:]]+|[[:space:]]+$/, "", $2)
+      if ($2 ~ /^[0-9]+$/) print $2
+    }
+  ' |
+  head -n 1
+)
+
+if [ -z "$PROJECT_COUNT" ]; then
+  echo "Could not parse Project count. Refusing to populate to avoid duplicates."
+  exit 1
+fi
+
+echo "Found $PROJECT_COUNT project(s)."
+
+if [ "$PROJECT_COUNT" -gt 0 ]; then
+  echo "At least one project exists. Skipping population."
   exit 0
 fi
 
