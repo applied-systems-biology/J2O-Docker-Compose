@@ -1,0 +1,20 @@
+FROM quay.io/podman/stable:v5.4
+
+USER root
+
+# Make sure Fedora's CA trust packages are present/current.
+RUN dnf install -y ca-certificates p11-kit p11-kit-trust curl \
+ && update-ca-trust || true \
+ && dnf clean all
+
+# Add NVIDIA's RPM repo, then remove the hardcoded Fedora-incompatible sslcacert line.
+RUN curl -fsSL https://nvidia.github.io/libnvidia-container/stable/rpm/nvidia-container-toolkit.repo \
+      -o /etc/yum.repos.d/nvidia-container-toolkit.repo \
+ && sed -i '/^sslcacert=/d' /etc/yum.repos.d/nvidia-container-toolkit.repo \
+ && dnf --refresh install -y nvidia-container-toolkit-base \
+ && dnf clean all
+
+COPY podman-entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+CMD ["/entrypoint.sh"]

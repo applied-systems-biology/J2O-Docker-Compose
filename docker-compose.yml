@@ -1,5 +1,34 @@
 services:
 
+  podman-socket:
+    build:
+      context: .
+      dockerfile: Dockerfile.podman
+    privileged: true
+    # Useful if Docker daemon has userns-remap enabled; otherwise optional:
+    userns_mode: "host"
+    devices:
+      - /dev/fuse:/dev/fuse
+    security_opt:
+      - seccomp=unconfined
+      - apparmor=unconfined   # mainly relevant on AppArmor hosts
+      - label=disable         # mainly relevant on SELinux hosts
+    command: ["/entrypoint.sh"]
+    volumes:
+      - "podman_socket:/tmp"
+      - "podman_storage:/var/lib/containers"
+      - "j2o-files:/j2o-host/j2o-files"
+      - "j2o-artifacts:/j2o-host/j2o-artifacts/artifacts"
+    networks:
+      - omero
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
   database:
     image: "postgres:16"
     environment:
@@ -25,6 +54,7 @@ services:
       CONFIG_omero_db_pass: omero
       CONFIG_omero_db_name: omero
       ROOTPASS: omero
+      CONFIG_omero_policy_binary__access: +read,+write,+image,+plate
     networks:
       - omero
     ports:
@@ -69,10 +99,16 @@ services:
       - omeroserver
     ports:
       - "4080:4080"
+    environment:
+      CONTAINER_HOST: "unix:///tmp/podman.sock"
+      J2O_HOST_DATA_PATH: "/j2o-host/j2o-files/data"
+      J2O_HOST_ARTIFACTS_PATH: "/j2o-host/j2o-artifacts"
     volumes:
       - "omero:/OMERO"
       - "config_volume:/opt/omero/web/OMERO.web/etc/grid"
-      - "log_volume:/tmp/jipipe_logs"
+      - "j2o-files:/opt/omero/web/OMERO.web/var/j2o-files"
+      - "j2o-artifacts:/root/.local/share/JIPipe/artifacts"
+      - "podman_socket:/tmp"
   celeryworker:
     build:
       context: .
@@ -86,14 +122,21 @@ services:
     volumes:
       - "omero:/OMERO"  # If needed for data access
       - "config_volume:/opt/omero/web/OMERO.web/etc/grid"
-      - "log_volume:/tmp/jipipe_logs"
+      - "j2o-files:/opt/omero/web/OMERO.web/var/j2o-files"
+      - "j2o-artifacts:/root/.local/share/JIPipe/artifacts"
+      - "podman_socket:/tmp"
     environment:
       OMERODIR: /opt/omero/web/OMERO.web
+      CONTAINER_HOST: "unix:///tmp/podman.sock"
+      J2O_HOST_DATA_PATH: "/j2o-host/j2o-files/data"
+      J2O_HOST_ARTIFACTS_PATH: "/j2o-host/j2o-artifacts"
 networks:
   omero:
-
 volumes:
+  j2o-files:
+  j2o-artifacts:
   database:
   omero:
   config_volume:
-  log_volume:
+  podman_socket:
+  podman_storage:

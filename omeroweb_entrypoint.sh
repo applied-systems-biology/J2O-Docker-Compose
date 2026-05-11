@@ -8,6 +8,12 @@ for i in {1..30}; do
   sleep 2
 done
 
+# Ensure directories exist with world-write permissions
+mkdir -p /opt/omero/web/OMERO.web/var/j2o-files/data
+mkdir -p /opt/omero/web/OMERO.web/var/j2o-files/logs
+chmod 777 /opt/omero/web/OMERO.web/var/j2o-files/data
+chmod 777 /opt/omero/web/OMERO.web/var/j2o-files/logs
+
 echo "OMERO.server is available."
 
 # Basic OMERO.web setup
@@ -22,15 +28,19 @@ su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config set omero.we
 
 # Plugin setup
 existing_apps=$(su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config get omero.web.apps")
-if [[ "$existing_apps" != *"JIPipeRunner"* ]]; then
-        su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config append omero.web.apps '\"JIPipeRunner\"'"
-        su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config append omero.web.ui.right_plugins '[\"JIPipeRunner\", \"JIPipeRunner/right_plugin_example.js.html\", \"jipipe_form_container\"]'"
+if [[ "$existing_apps" != *"J2O"* ]]; then
+        su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config append omero.web.apps '\"J2O\"'"
+        su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config append omero.web.ui.right_plugins '[\"J2O\", \"J2O/right_plugin_example.js.html\", \"jipipe_form_container\"]'"
 fi
 su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config set omero.web.imagej \"/opt/Fiji.app/ImageJ-linux64\""
 
 # Redis cache config
 su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config set omero.web.caches '{\"default\": {\"BACKEND\": \"django_redis.cache.RedisCache\", \"LOCATION\": \"redis://redis:6379/0\"}}'"
 su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config set omero.web.session_engine 'django.contrib.sessions.backends.cache'"
+
+# GPU acceleration setup
+su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config set omero.web.jipipe.gpu_devices 'nvidia.com/gpu=all'"
+
 
 # Start OMERO.web
 exec su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero web start --foreground"

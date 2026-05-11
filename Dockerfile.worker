@@ -3,11 +3,9 @@ USER root
 
 # Install JIPipeRunner
 WORKDIR /opt
-RUN git clone https://asb-git.hki-jena.de/MWank/OMERO_JIPipe_Plugin.git
-WORKDIR /opt/OMERO_JIPipe_Plugin
-RUN git reset --hard cd7e5303
-RUN /opt/omero/web/venv3/bin/pip install /opt/OMERO_JIPipe_Plugin
-
+RUN git clone --branch docker-compose-setup --single-branch https://github.com/applied-systems-biology/J2O.git
+WORKDIR /opt/J2O
+RUN /opt/omero/web/venv3/bin/pip install /opt/J2O
 # Install tools and Java runtime for Fiji
 RUN dnf install -y java-17-openjdk-headless xorg-x11-server-Xvfb && dnf clean all
 

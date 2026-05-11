@@ -43,21 +43,44 @@ if [ "$PROJECT_COUNT" -gt 0 ]; then
   exit 0
 fi
 
+OMERO=/opt/omero/server/venv3/bin/omero
+
 # perform all OMERO‐CLI steps as omero-server user
-/opt/omero/server/venv3/bin/omero login -s "$OMERO_HOST:$OMERO_PORT" -u "$OMERO_USER" -w "$OMERO_PASSWORD"
+$OMERO login -s "$OMERO_HOST:$OMERO_PORT" -u "$OMERO_USER" -w "$OMERO_PASSWORD"
 
-/opt/omero/server/venv3/bin/omero obj new Project name=CustomResults description='Example project to select for custom input'
+$OMERO obj new Project name=CustomResults description='Example project to select for custom input'
 
-PID=$(/opt/omero/server/venv3/bin/omero obj new Project name=Data description='Example project that holds data')
+PID=$($OMERO obj new Project name=Data description='Example project that holds data')
 
-DID=$(/opt/omero/server/venv3/bin/omero obj new Dataset name=ExampleData description='Example dataset that holds data')
+DID=$($OMERO obj new Dataset name=ExampleData description='Example dataset that holds data')
 
-/opt/omero/server/venv3/bin/omero obj new ProjectDatasetLink parent=$PID child=$DID
+$OMERO obj new ProjectDatasetLink parent=$PID child=$DID
 
-/opt/omero/server/venv3/bin/omero import ExampleFiles/ExampleImage.png -T Dataset:name:ExampleData
+$OMERO import ExampleFiles/ExampleImage.JPG -T Dataset:name:ExampleData
 
-OFID=$(/opt/omero/server/venv3/bin/omero upload ExampleFiles/DockerDemoPipeline.jip)
+OFID=$($OMERO upload ExampleFiles/DockerDemoPipeline.jip)
 
-FAID=$(/opt/omero/server/venv3/bin/omero obj new FileAnnotation file=$OFID description="JIPipe pipeline file")
+FAID=$($OMERO obj new FileAnnotation file=$OFID description="JIPipe demo workflow file")
 
-/opt/omero/server/venv3/bin/omero obj new ProjectAnnotationLink child=$FAID parent=$PID
+$OMERO obj new ProjectAnnotationLink child=$FAID parent=$PID
+
+OFID=$($OMERO upload ExampleFiles/DockerDemoPipeline.crate.zip)
+
+FAID=$($OMERO obj new FileAnnotation file=$OFID description="JIPipe demo workflow RO-Crate")
+
+$OMERO obj new ProjectAnnotationLink child=$FAID parent=$PID
+
+SID="$($OMERO obj new Screen \
+  name=ExampleHCS \
+  description='Example HCS screen imported from hcs.companion.ome')"
+SCREEN_ID="${SID#Screen:}"
+
+# Real HCS import
+$OMERO import ExampleFiles/plate-companion/hcs.companion.ome -r "$SCREEN_ID"
+
+# Upload Cellpose model
+OFID=$($OMERO upload ExampleFiles/Zoltan_02_Size30_allNodules_20Images_1000epochs)
+
+FAID=$($OMERO obj new FileAnnotation file=$OFID description="Cellpose model for node detection")
+
+$OMERO obj new ProjectAnnotationLink child=$FAID parent=$PID
