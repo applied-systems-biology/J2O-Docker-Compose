@@ -14,6 +14,8 @@ services:
       - apparmor=unconfined   # mainly relevant on AppArmor hosts
       - label=disable         # mainly relevant on SELinux hosts
     command: ["/entrypoint.sh"]
+    environment:
+      ENABLE_NVIDIA_GPU: "0"
     volumes:
       - "podman_socket:/tmp"
       - "podman_storage:/var/lib/containers"
@@ -21,14 +23,6 @@ services:
       - "j2o-artifacts:/j2o-host/j2o-artifacts/artifacts"
     networks:
       - omero
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
-
   database:
     image: "postgres:16"
     environment:
@@ -103,6 +97,7 @@ services:
       CONTAINER_HOST: "unix:///tmp/podman.sock"
       J2O_HOST_DATA_PATH: "/j2o-host/j2o-files/data"
       J2O_HOST_ARTIFACTS_PATH: "/j2o-host/j2o-artifacts"
+      ENABLE_NVIDIA_GPU: "0"
     volumes:
       - "omero:/OMERO"
       - "config_volume:/opt/omero/web/OMERO.web/etc/grid"

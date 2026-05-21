@@ -1,5 +1,8 @@
 #!/bin/bash
 
+READY_FILE="/opt/omero/web/OMERO.web/etc/grid/j2o-config-ready"
+rm -f "$READY_FILE"
+
 # Wait for OMERO.server to be available
 echo "Waiting for OMERO.server at omeroserver:4064..."
 for i in {1..30}; do
@@ -39,8 +42,16 @@ su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config set omero.we
 su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config set omero.web.session_engine 'django.contrib.sessions.backends.cache'"
 
 # GPU acceleration setup
-su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config set omero.web.jipipe.gpu_devices 'nvidia.com/gpu=all'"
+if [ "${ENABLE_NVIDIA_GPU:-0}" = "1" ]; then
+    echo "ENABLE_NVIDIA_GPU=1; Setting gpu_devices to all in OMERO config..."
+    su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config set omero.web.jipipe.gpu_devices 'nvidia.com/gpu=all'"
+else
+    echo "ENABLE_NVIDIA_GPU=0; Setting gpu_devices to none in OMERO config..."
+    su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config set omero.web.jipipe.gpu_devices ''"
+fi
 
+echo "J2O config initialized."
+touch "$READY_FILE"
 
 # Start OMERO.web
 exec su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero web start --foreground"

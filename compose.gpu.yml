@@ -1,0 +1,19 @@
+services:
+  podman-socket:
+    environment:
+      ENABLE_NVIDIA_GPU: "1"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  omeroweb:
+    environment:
+      ENABLE_NVIDIA_GPU: "1"
+
+  celeryworker:
+    environment:
+      ENABLE_NVIDIA_GPU: "1"

@@ -26,3 +26,7 @@ Then, pull the latest major versions of the containers:
 Finally, start the containers:
 
     docker compose up
+
+If your computer has an NVIDIA GPU, you can enable the use of GPU acceleration by running this instead:
+
+    docker compose -f docker-compose.yml -f compose.gpu.yml up
