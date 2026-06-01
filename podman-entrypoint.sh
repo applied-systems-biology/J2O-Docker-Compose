@@ -11,4 +11,4 @@ else
     echo "ENABLE_NVIDIA_GPU is not enabled; skipping NVIDIA CDI setup."
 fi
 
-exec podman system service --time=0 unix:///tmp/podman.sock
+exec podman system service --time=0 unix:///podman-sock/podman.sock

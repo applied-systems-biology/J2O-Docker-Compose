@@ -16,13 +16,17 @@ services:
     command: ["/entrypoint.sh"]
     environment:
       ENABLE_NVIDIA_GPU: "0"
+    tmpfs:
+      - /tmp
+      - /run
     volumes:
-      - "podman_socket:/tmp"
+      - "podman_socket:/podman-sock"
       - "podman_storage:/var/lib/containers"
       - "j2o-files:/j2o-host/j2o-files"
       - "j2o-artifacts:/j2o-host/j2o-artifacts/artifacts"
     networks:
       - omero
+
   database:
     image: "postgres:16"
     environment:
@@ -94,7 +98,7 @@ services:
     ports:
       - "4080:4080"
     environment:
-      CONTAINER_HOST: "unix:///tmp/podman.sock"
+      CONTAINER_HOST: "unix:///podman-sock/podman.sock"
       J2O_HOST_DATA_PATH: "/j2o-host/j2o-files/data"
       J2O_HOST_ARTIFACTS_PATH: "/j2o-host/j2o-artifacts"
       ENABLE_NVIDIA_GPU: "0"
@@ -103,7 +107,7 @@ services:
       - "config_volume:/opt/omero/web/OMERO.web/etc/grid"
       - "j2o-files:/opt/omero/web/OMERO.web/var/j2o-files"
       - "j2o-artifacts:/root/.local/share/JIPipe/artifacts"
-      - "podman_socket:/tmp"
+      - "podman_socket:/podman-sock"
   celeryworker:
     build:
       context: .
@@ -119,10 +123,10 @@ services:
       - "config_volume:/opt/omero/web/OMERO.web/etc/grid"
       - "j2o-files:/opt/omero/web/OMERO.web/var/j2o-files"
       - "j2o-artifacts:/root/.local/share/JIPipe/artifacts"
-      - "podman_socket:/tmp"
+      - "podman_socket:/podman-sock"
     environment:
       OMERODIR: /opt/omero/web/OMERO.web
-      CONTAINER_HOST: "unix:///tmp/podman.sock"
+      CONTAINER_HOST: "unix:///podman-sock/podman.sock"
       J2O_HOST_DATA_PATH: "/j2o-host/j2o-files/data"
       J2O_HOST_ARTIFACTS_PATH: "/j2o-host/j2o-artifacts"
 networks:

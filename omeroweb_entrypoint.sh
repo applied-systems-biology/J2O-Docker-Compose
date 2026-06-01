@@ -22,7 +22,8 @@ echo "OMERO.server is available."
 # Basic OMERO.web setup
 su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config set omero.web.server_list '[ [\"omeroserver\", 4064] ]'"
 su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config set omero.web.static_url '/static/'"
-
+su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config set omero.web.jipipe.tempdir '/opt/omero/web/OMERO.web/var/j2o-files/data'"
+su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero config set omero.web.jipipe.logdir '/opt/omero/web/OMERO.web/var/j2o-files/logs'"
 # Collect static files
 su -s /bin/bash omero-web -c "/opt/omero/web/venv3/bin/omero web syncmedia"
 
